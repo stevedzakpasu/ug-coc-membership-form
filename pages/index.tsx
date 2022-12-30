@@ -1,12 +1,24 @@
 import { Inter } from "@next/font/google";
-import CreateAccount from "./register";
-
+import { useRouter } from "next/router";
 const inter = Inter({ subsets: ["latin"] });
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <>
-      <CreateAccount />
-    </>
-  );
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+      if (isLoggedIn === "yes") {
+        router.push("/dashboard");
+      } else {
+        router.push("/login");
+      }
+    }
+  }, []);
+
+  return <div>{isLoading && <>Loading...</>}</div>;
 }

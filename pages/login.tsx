@@ -1,8 +1,8 @@
-import React from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-
+import { useEffect } from "react";
 function Login() {
   const {
     handleSubmit,
@@ -12,6 +12,16 @@ function Login() {
     watch,
   } = useForm({ mode: "all" });
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+      if (isLoggedIn === "yes") {
+        router.push("/dashboard");
+      }
+    }
+  }, []);
 
   const onSubmit = async (data: any) => {
     const reqData = `grant_type=&username=${data.username}&password=${data.password}&scope=&client_id=&client_secret=`;
@@ -28,6 +38,7 @@ function Login() {
         if (response.status == 200) {
           if (typeof window !== "undefined") {
             localStorage.setItem("token", response.data.access_token);
+            localStorage.setItem("isLoggedIn", "yes");
           }
           router.push("/dashboard");
         }
