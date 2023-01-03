@@ -1,9 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Alert from "@mui/material/Alert";
 
 function CreateAccount() {
+  const [conflictErrorAlertVisible, setConflictErrorAlertVisible] =
+    useState(false);
+  const [successAlertVisible, setSuccessAlertVisible] = useState(false);
+  const [errorAlertVisible, setErrorAlertVisible] = useState(false);
+
   const router = useRouter();
   const {
     handleSubmit,
@@ -38,57 +44,110 @@ function CreateAccount() {
       )
       .then((res) => {
         if (res.status == 200) {
-          alert("Successfully registered");
-          // modal to show that the login was successfull
-          // ondismiss modal: push login
+          window.scrollTo(0, 0);
+          setSuccessAlertVisible(true);
+          setTimeout(() => setSuccessAlertVisible(false), 10000);
+          reset();
         }
       })
-      .catch((res) => {
-        alert(
-          "An error occurred: Username or email address already in use! Consider login if you already have an account!"
-        );
+      .catch((error) => {
+        if (error.response.status === 409) {
+          window.scrollTo(0, 0);
+          setConflictErrorAlertVisible(true);
+
+          setTimeout(() => setConflictErrorAlertVisible(false), 5000);
+        } else {
+          window.scrollTo(0, 0);
+          setErrorAlertVisible(true);
+          setTimeout(() => setErrorAlertVisible(false), 5000);
+        }
       });
   };
   return (
-    <>
-      <p className="title">Registration Form</p>
+    <div className="flex items-center justify-center h-screen w-screen flex-col bg-blue-900 text-white">
+      {successAlertVisible && (
+        <Alert className="w-96" severity="success">
+          You have been successfully registered! You can now log into your
+          account
+        </Alert>
+      )}
+      {conflictErrorAlertVisible && (
+        <Alert className="w-96" severity="error">
+          An error occurred: Username or email address already in use!
+        </Alert>
+      )}
+      {errorAlertVisible && (
+        <Alert className="w-96" severity="error">
+          An error occurred, please try again later!
+        </Alert>
+      )}
 
-      <form className="App" onSubmit={handleSubmit(onSubmit)}>
-        <>
-          <p>Username:</p>
-          <input
-            type="text"
-            {...register("username", { required: "required" })}
-          />
-          {errors.username && errors.username.message}
-          <p>Full Name:</p>
-          <input
-            type="text"
-            {...register("full_name", { required: "required" })}
-          />
-          {errors.full_name && errors.full_name.message}
-          <p>Email</p>
-          <input
-            type="email"
-            {...register("email", { required: "required" })}
-          />
-          {errors.email && errors.email.message}
-          <p>Password</p>
-          <input
-            type="password"
-            {...register("password", { required: "required" })}
-          />
-          {errors.password && errors.password.message}
-          <button type={"submit"} style={{ backgroundColor: "#a1eafb" }}>
-            Register
-          </button>
-        </>
+      <h1>University of Ghana Church of Christ Congregation </h1>
+      <p>Member Details </p>
+      <h1 className="font-semibold text-xl my-1">Create an account</h1>
+      <p className="font-light text-sm">Enter your details below </p>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <p className="font-normal text-sm mt-3">Username</p>
+        <input
+          className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+          type="text"
+          {...register("username", { required: true })}
+        />
+        {errors.username && (
+          <p className="font-normal text-xs text-red-500">
+            username is mandatory{" "}
+          </p>
+        )}{" "}
+        <p className="font-normal text-sm mt-3">Full Name</p>
+        <input
+          className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+          type="text"
+          {...register("full_name", { required: true })}
+        />
+        {errors.full_name && (
+          <p className="font-normal text-xs text-red-500">
+            full name is mandatory{" "}
+          </p>
+        )}{" "}
+        <p className="font-normal text-sm mt-3">Email Address</p>
+        <input
+          className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+          type="email"
+          {...register("email", { required: true })}
+        />
+        {errors.email && (
+          <p className="font-normal text-xs text-red-500">
+            email is mandatory{" "}
+          </p>
+        )}
+        <p className="font-normal text-sm mt-3">Password</p>
+        <input
+          className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+          type="password"
+          {...register("password", { required: true })}
+        />
+        {errors.password && (
+          <p className="font-normal text-xs text-red-500">
+            password is mandatory{" "}
+          </p>
+        )}
+        <button
+          type={"submit"}
+          className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+        >
+          Register
+        </button>
+        <p
+          onClick={() => {
+            router.push("/login");
+          }}
+          className=" py-5 font-light text-sm text-center cursor-pointer"
+        >
+          Already have an account? Click here to login
+        </p>
       </form>
-
-      <button onClick={() => router.push("/login")}>
-        click me to go to the login page
-      </button>
-    </>
+    </div>
   );
 }
 

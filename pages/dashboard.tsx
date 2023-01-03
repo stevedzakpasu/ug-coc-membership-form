@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import Alert from "@mui/material/Alert";
 function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [successAlertVisible, setSuccessAlertVisible] = useState(false);
+  const [errorAlertVisible, setErrorAlertVisible] = useState(false);
   const [data, setData] = useState({
     full_name: null,
     email: null,
@@ -25,6 +28,7 @@ function Dashboard() {
       committee: null,
     },
   });
+
   const {
     handleSubmit,
     formState: { errors },
@@ -37,47 +41,29 @@ function Dashboard() {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
 
-      if (data.member_id) {
-        axios({
-          method: "patch",
-          url: `https://ug-attendance-app.herokuapp.com/api/members${data.member_id}`,
-          data: JSON.stringify(data),
+      axios({
+        method: "post",
+        url: "https://ug-attendance-app.herokuapp.com/api/members",
+        data: JSON.stringify(data),
 
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${token}`,
-          },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (response.status == 200) {
+            window.scrollTo(0, 0);
+            setSuccessAlertVisible(true);
+            setTimeout(() => setSuccessAlertVisible(false), 10000);
+          }
         })
-          .then((response) => {
-            if (response.status == 200) {
-              alert("successfully registered");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        axios({
-          method: "post",
-          url: "https://ug-attendance-app.herokuapp.com/api/members",
-          data: JSON.stringify(data),
-
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((response) => {
-            if (response.status == 200) {
-              alert("successfully registered");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+        .catch((error) => {
+          window.scrollTo(0, 0);
+          setErrorAlertVisible(true);
+          setTimeout(() => setErrorAlertVisible(false), 5000);
+        });
     }
   };
   useEffect(() => {
@@ -103,7 +89,7 @@ function Dashboard() {
           })
           .catch(() => {
             localStorage.setItem("isLoggedIn", "no");
-            alert("your session has expired, kindly log in again");
+            alert("Your session has expired, kindly log in again");
             router.push("/login");
           });
       }
@@ -114,106 +100,250 @@ function Dashboard() {
   return (
     <div>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <h1>Kindly wait as the information is Loading...</h1>
       ) : (
-        <>
-          <h1>Here is the dashboard</h1>
-          <p>Email: {data.email}</p>
-          <p>Full Name: {data.full_name}</p>
+        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
+          {successAlertVisible && (
+            <Alert className="w-96" severity="success">
+              You have been successfully registered! You can now log into your
+              account
+            </Alert>
+          )}
+          {errorAlertVisible && (
+            <Alert className="w-96" severity="error">
+              An error occurred, please try again later!
+            </Alert>
+          )}
+          <p>Welcome {data.full_name}! </p>
           <p>Username:{data.username}</p>
           {data.member_id ? (
-            <>
-              <h1> Below are your information</h1>
+            <div className="text-left">
+              <h1 className="my-5">
+                <p className="font-bold">Membership ID:</p>
+                {data.member_id}
+              </h1>
+              <h1 className="y-5">
+                <p className="font-bold">First Name:</p>
+                {data.member.first_name}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Other Names:</p>
 
-              <h1>Membership ID: {data.member_id}</h1>
-              <h1>First Name: {data.member.first_name}</h1>
-              <h1>Other Names: {data.member.other_names}</h1>
-              <h1>Last Name: {data.member.last_name}</h1>
-              <h1>Gender: {data.member.sex}</h1>
-              <h1>Phone Number: {data.member.phone_number}</h1>
-              <h1>Hall of Residence: {data.member.hall}</h1>
-              <h1>Room Number{data.member.room_number}</h1>
-              <h1>Programme of Study: {data.member.programme}</h1>
-              <h1>Level: {data.member.level}</h1>
-              <h1>Date of birth: {data.member.date_of_birth}</h1>
-              <h1>Congregation: {data.member.congregation}</h1>
-              <h1>Committee: {data.member.committee}</h1>
+                {data.member.other_names}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Last Name:</p>
 
-              <p>Click here to update details</p>
-            </>
+                {data.member.last_name}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Gender:</p>
+                {data.member.sex}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Phone Number:</p>
+
+                {data.member.phone_number}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Hall of Residence:</p>
+                {data.member.hall}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Room Number:</p>
+                {data.member.room_number}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Programme of Study:</p>
+
+                {data.member.programme}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Level:</p>
+
+                {data.member.level}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Date of birth:</p>
+
+                {data.member.date_of_birth}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Congregation:</p>
+
+                {data.member.congregation}
+              </h1>
+              <h1 className="my-5">
+                <p className="font-bold">Committee:</p>
+
+                {data.member.committee}
+              </h1>
+
+              <p
+                className="cursor-pointer"
+                onClick={() => router.push("/dashboard/edit_details")}
+              >
+                Click here to update details
+              </p>
+            </div>
           ) : (
             <>
-              <h1> add your membership information below</h1>
+              <h1>
+                {" "}
+                Kindly fill the form below with the respective information
+              </h1>
               <form className="App" onSubmit={handleSubmit(onSubmit)}>
                 <>
                   <p>First Name:</p>
                   <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10 w-96"
                     type="text"
-                    {...register("first_name", { required: "required" })}
+                    {...register("first_name", { required: true })}
                   />
-                  {errors.first_name && errors.first_name.message}
+                  {errors.first_name && (
+                    <p className="font-normal text-xs text-red-500">
+                      first name is mandatory{" "}
+                    </p>
+                  )}
                   <p>Other Names(if any):</p>
-                  <input type="text" {...register("others_names")} />
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("others_names")}
+                  />
                   <p>Last Name</p>
                   <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
-                    {...register("last_name", { required: "required" })}
+                    {...register("last_name", { required: true })}
                   />
-                  {errors.last_name && errors.last_name.message}
+                  {errors.last_name && (
+                    <p className="font-normal text-xs text-red-500">
+                      last name is mandatory{" "}
+                    </p>
+                  )}
                   <p>Gender</p>
-                  <label htmlFor="male_field">
+                  <label
+                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    htmlFor="male_field"
+                  >
                     <input
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                       type="radio"
-                      value="male"
+                      value="Male"
                       {...register("sex", {
-                        required: "Required",
+                        required: true,
                       })}
                     />{" "}
                     Male
                   </label>
-                  <label htmlFor="female_field">
+                  <label
+                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    htmlFor="female_field"
+                  >
                     <input
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                       type="radio"
-                      value="female"
+                      value="Female"
                       {...register("sex", {
-                        required: "Required",
+                        required: true,
                       })}
                     />{" "}
                     Female
                   </label>
-                  {errors.sex && errors.sex.message}
+                  {errors.sex && (
+                    <p className="font-normal text-xs text-red-500">
+                      select a gender
+                    </p>
+                  )}
                   <p>Phone Number:</p>
                   <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
-                    {...register("phone_number", { required: "required" })}
+                    {...register("phone_number", { required: true })}
                   />
-                  {errors.first_name && errors.first_name.message}
+                  {errors.phone_number && (
+                    <p className="font-normal text-xs text-red-500">
+                      phone number is mandatory{" "}
+                    </p>
+                  )}
                   <p>Hall</p>
-                  <select {...register("hall", { required: "required" })}>
+                  <select
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    {...register("hall", { required: true })}
+                  >
                     <option value="Sey">Sey</option>
                     <option value="Nelson">Nelson</option>
                     <option value="Limann">Limann</option>
                   </select>
-                  <p>Room Number:</p>
-                  <input type="text" {...register("room_number")} />{" "}
+                  {errors.hall && (
+                    <p className="font-normal text-xs text-red-500">
+                      select an option{" "}
+                    </p>
+                  )}
+                  <p>Room Number: </p>
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("room_number")}
+                  />
                   <p>Programme of Study:</p>
-                  <input type="text" {...register("programme")} />
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("programme")}
+                  />
                   <p>Level:</p>
-                  <select {...register("level")}>
+                  <select
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    {...register("level", { required: true })}
+                  >
                     <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="300">300</option>
                     <option value="400">400</option>
                   </select>
+                  {errors.level && (
+                    <p className="font-normal text-xs text-red-500">
+                      select an option{" "}
+                    </p>
+                  )}
                   <p>Date of birth:</p>
-                  <input type="date" {...register("date_of_birth")} />{" "}
+                  <input
+                    type="date"
+                    {...register("date_of_birth", { required: true })}
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                  />{" "}
+                  {errors.date_of_birth && (
+                    <p className="font-normal text-xs text-red-500">
+                      date of birth is mandatory{" "}
+                    </p>
+                  )}
                   <p>Congregation:</p>
-                  <input type="text" {...register("congregation")} />{" "}
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("congregation", { required: true })}
+                  />{" "}
+                  {errors.congregation && (
+                    <p className="font-normal text-xs text-red-500">
+                      congregation is mandatory{" "}
+                    </p>
+                  )}
                   <p>Committee:</p>
-                  <input type="text" {...register("committee")} />
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("committee", { required: true })}
+                  />
+                  {errors.committee && (
+                    <p className="font-normal text-xs text-red-500">
+                      select an option{" "}
+                    </p>
+                  )}
                   <button
+                    className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
                     type={"submit"}
-                    style={{ backgroundColor: "#a1eafb" }}
                   >
                     Register
                   </button>
@@ -223,14 +353,16 @@ function Dashboard() {
           )}
 
           <button
-            onClick={() => {
+            className=" my-5 w-48 py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            onClick={async () => {
               localStorage.clear();
-              router.push("/login");
+              await router.push("/login");
+              router.reload();
             }}
           >
             Logout
           </button>
-        </>
+        </div>
       )}
     </div>
   );
