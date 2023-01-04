@@ -3,17 +3,21 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Alert from "@mui/material/Alert";
+import QRCode from "react-qr-code";
+import * as CryptoJS from "crypto-js"; //
 function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [encryptedData, setEncryptedData] = useState("");
   const [data, setData] = useState({
     full_name: null,
     email: null,
     username: null,
     member_id: null,
     member: {
+      id: null,
       first_name: null,
       other_names: null,
       last_name: null,
@@ -81,7 +85,7 @@ function Dashboard() {
           .get("https://ug-attendance-app.herokuapp.com/users/me", {
             headers: headers,
           })
-          .then((res) => {
+          .then(async (res) => {
             if (res.status == 200) {
               setData(res.data);
               setIsLoading(false);
@@ -94,11 +98,20 @@ function Dashboard() {
           });
       }
     };
+
     Login();
   }, []);
+  useEffect(() => {
+    setEncryptedData(
+      CryptoJS.AES.encrypt(
+        JSON.stringify(data.member),
+        "XkhZG4fW2t2W"
+      ).toString()
+    );
+  }, [data]);
 
   return (
-    <div>
+    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
       {isLoading ? (
         <h1>Kindly wait as the information is Loading...</h1>
       ) : (
@@ -178,9 +191,18 @@ function Dashboard() {
 
                 {data.member.committee}
               </h1>
+              <div>
+                <p className="py-5 text-center">Here is your QR Code</p>
+                <QRCode
+                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                  value={encryptedData}
+                  level="Q"
+                  className="p-16 bg-white rounded-3xl"
+                />
+              </div>
 
               <p
-                className="cursor-pointer"
+                className=" py-5 font-light text-sm text-center cursor-pointer"
                 onClick={() => router.push("/dashboard/edit_details")}
               >
                 Click here to update details
@@ -194,7 +216,7 @@ function Dashboard() {
               </h1>
               <form className="App" onSubmit={handleSubmit(onSubmit)}>
                 <>
-                  <p>First Name:</p>
+                  <p className="font-semibold my-3">First Name:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10 w-96"
                     type="text"
@@ -205,13 +227,13 @@ function Dashboard() {
                       first name is mandatory{" "}
                     </p>
                   )}
-                  <p>Other Names(if any):</p>
+                  <p className="font-semibold my-3">Other Names(if any):</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
                     {...register("others_names")}
                   />
-                  <p>Last Name</p>
+                  <p className="font-semibold my-3">Last Name</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -222,7 +244,7 @@ function Dashboard() {
                       last name is mandatory{" "}
                     </p>
                   )}
-                  <p>Gender</p>
+                  <p className="font-semibold my-3">Gender</p>
                   <label
                     className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     htmlFor="male_field"
@@ -256,7 +278,7 @@ function Dashboard() {
                       select a gender
                     </p>
                   )}
-                  <p>Phone Number:</p>
+                  <p className="font-semibold my-3">Phone Number:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -267,7 +289,7 @@ function Dashboard() {
                       phone number is mandatory{" "}
                     </p>
                   )}
-                  <p>Hall</p>
+                  <p className="font-semibold my-3">Hall</p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("hall", { required: true })}
@@ -281,19 +303,19 @@ function Dashboard() {
                       select an option{" "}
                     </p>
                   )}
-                  <p>Room Number: </p>
+                  <p className="font-semibold my-3">Room Number: </p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
                     {...register("room_number")}
                   />
-                  <p>Programme of Study:</p>
+                  <p className="font-semibold my-3">Programme of Study:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
                     {...register("programme")}
                   />
-                  <p>Level:</p>
+                  <p className="font-semibold my-3">Level:</p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("level", { required: true })}
@@ -308,7 +330,7 @@ function Dashboard() {
                       select an option{" "}
                     </p>
                   )}
-                  <p>Date of birth:</p>
+                  <p className="font-semibold my-3">Date of birth:</p>
                   <input
                     type="date"
                     {...register("date_of_birth", { required: true })}
@@ -319,7 +341,7 @@ function Dashboard() {
                       date of birth is mandatory{" "}
                     </p>
                   )}
-                  <p>Congregation:</p>
+                  <p className="font-semibold my-3">Congregation:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -330,7 +352,7 @@ function Dashboard() {
                       congregation is mandatory{" "}
                     </p>
                   )}
-                  <p>Committee:</p>
+                  <p className="font-semibold my-3">Committee:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"

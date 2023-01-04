@@ -88,7 +88,7 @@ function CreateAccount() {
       <p className="font-light text-sm">Enter your details below </p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <p className="font-normal text-sm mt-3">Username</p>
+        <p className="font-semibold my-3">Username</p>
         <input
           className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
           type="text"
@@ -99,7 +99,7 @@ function CreateAccount() {
             username is mandatory{" "}
           </p>
         )}{" "}
-        <p className="font-normal text-sm mt-3">Full Name</p>
+        <p className="font-semibold my-3">Full Name</p>
         <input
           className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
           type="text"
@@ -110,7 +110,7 @@ function CreateAccount() {
             full name is mandatory{" "}
           </p>
         )}{" "}
-        <p className="font-normal text-sm mt-3">Email Address</p>
+        <p className="font-semibold my-3">Email Address</p>
         <input
           className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
           type="email"
@@ -121,7 +121,7 @@ function CreateAccount() {
             email is mandatory{" "}
           </p>
         )}
-        <p className="font-normal text-sm mt-3">Password</p>
+        <p className="font-semibold my-3">Password</p>
         <input
           className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
           type="password"

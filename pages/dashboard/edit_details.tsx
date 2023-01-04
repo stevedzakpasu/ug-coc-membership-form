@@ -14,6 +14,7 @@ function EditDetails() {
     username: null,
     member_id: null,
     member: {
+      id: null,
       first_name: null,
       other_names: null,
       last_name: null,
@@ -135,27 +136,27 @@ function EditDetails() {
             <h1> Modify your personal information below</h1>
             <form className="App" onSubmit={handleSubmit(onSubmit)}>
               <>
-                <p className="font-bold my-3">First Name:</p>
+                <p className="font-semibold my-3">First Name:</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("first_name", { required: "required" })}
                 />
                 {errors.first_name && errors.first_name.message}
-                <p className="font-bold my-3">Other Names(if any):</p>
+                <p className="font-semibold my-3">Other Names(if any):</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("other_names")}
                 />
-                <p className="font-bold my-3">Last Name</p>
+                <p className="font-semibold my-3">Last Name</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("last_name", { required: "required" })}
                 />
                 {errors.last_name && errors.last_name.message}
-                <p className="font-bold my-3">Gender</p>
+                <p className="font-semibold my-3">Gender</p>
                 <label htmlFor="male_field">
                   <input
                     type="radio"
@@ -177,14 +178,14 @@ function EditDetails() {
                   Female
                 </label>
                 {errors.sex && errors.sex.message}
-                <p className="font-bold my-3">Phone Number:</p>
+                <p className="font-semibold my-3">Phone Number:</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("phone_number", { required: "required" })}
                 />
                 {errors.first_name && errors.first_name.message}
-                <p className="font-bold my-3">Hall</p>
+                <p className="font-semibold my-3">Hall</p>
                 <select
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   {...register("hall", { required: "required" })}
@@ -193,19 +194,19 @@ function EditDetails() {
                   <option value="Nelson">Nelson</option>
                   <option value="Limann">Limann</option>
                 </select>
-                <p className="font-bold my-3">Room Number: </p>
+                <p className="font-semibold my-3">Room Number: </p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("room_number")}
                 />{" "}
-                <p className="font-bold my-3">Programme of Study:</p>
+                <p className="font-semibold my-3">Programme of Study:</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("programme")}
                 />
-                <p className="font-bold my-3">Level:</p>
+                <p className="font-semibold my-3">Level:</p>
                 <select
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   {...register("level")}
@@ -215,19 +216,19 @@ function EditDetails() {
                   <option value="300">300</option>
                   <option value="400">400</option>
                 </select>
-                <p className="font-bold my-3">Date of birth:</p>
+                <p className="font-semibold my-3">Date of birth:</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="date"
                   {...register("date_of_birth")}
                 />{" "}
-                <p className="font-bold my-3">Congregation:</p>
+                <p className="font-semibold my-3">Congregation:</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
                   {...register("congregation")}
                 />{" "}
-                <p className="font-bold my-3">Committee:</p>
+                <p className="font-semibold my-3">Committee:</p>
                 <input
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   type="text"
@@ -239,6 +240,14 @@ function EditDetails() {
                 >
                   Update Details
                 </button>
+                <p
+                  onClick={() => {
+                    router.push("/dashboard");
+                  }}
+                  className=" py-5 font-light text-sm text-center cursor-pointer"
+                >
+                  Click here to go back to the main dashboard
+                </p>
               </>
             </form>
           </>
