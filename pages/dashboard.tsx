@@ -113,7 +113,7 @@ function Dashboard() {
   return (
     <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
       {isLoading ? (
-        <h1>Kindly wait as the information is Loading...</h1>
+        <h1>Kindly wait as the information is loading...</h1>
       ) : (
         <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
           {successAlertVisible && (
@@ -294,9 +294,12 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("hall", { required: true })}
                   >
-                    <option value="Sey">Sey</option>
-                    <option value="Nelson">Nelson</option>
-                    <option value="Limann">Limann</option>
+                    <option value="Elizabeth Sey Hall">
+                      Elizabeth Sey Hall
+                    </option>
+                    <option value="Jean Nelson Hall">Jean Nelson Hall</option>
+                    <option value="Hilla Limann Hall">Hilla Limann Hall</option>
+                    <option value="Alex Kwapong Hall">Alex Kwapong Hall</option>
                   </select>
                   {errors.hall && (
                     <p className="font-normal text-xs text-red-500">
@@ -353,11 +356,14 @@ function Dashboard() {
                     </p>
                   )}
                   <p className="font-semibold my-3">Committee:</p>
-                  <input
+                  <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                    type="text"
                     {...register("committee", { required: true })}
-                  />
+                  >
+                    <option value="Evangelism">Evangelism</option>
+                    <option value="Benevolence">Benevolence</option>
+                    <option value="Edification">Edification</option>
+                  </select>
                   {errors.committee && (
                     <p className="font-normal text-xs text-red-500">
                       select an option{" "}

@@ -190,9 +190,10 @@ function EditDetails() {
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
                   {...register("hall", { required: "required" })}
                 >
-                  <option value="Sey">Sey</option>
-                  <option value="Nelson">Nelson</option>
-                  <option value="Limann">Limann</option>
+                  <option value="Elizabeth Sey Hall">Elizabeth Sey Hall</option>
+                  <option value="Jean Nelson Hall">Jean Nelson Hall</option>
+                  <option value="Hilla Limann Hall">Hilla Limann Hall</option>
+                  <option value="Alex Kwapong Hall">Alex Kwapong Hall</option>
                 </select>
                 <p className="font-semibold my-3">Room Number: </p>
                 <input
@@ -229,11 +230,15 @@ function EditDetails() {
                   {...register("congregation")}
                 />{" "}
                 <p className="font-semibold my-3">Committee:</p>
-                <input
+                <select
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
-                  type="text"
                   {...register("committee")}
-                />
+                >
+                  {" "}
+                  <option value="Evangelism">Evangelism</option>
+                  <option value="Benevolence">Benevolence</option>
+                  <option value="Edification">Edification</option>
+                </select>
                 <button
                   type={"submit"}
                   className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
