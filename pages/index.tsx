@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
+    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left">
       {isLoading && <>Loading...</>}
     </div>
   );

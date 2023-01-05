@@ -114,44 +114,47 @@ function EditDetails() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
+    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left">
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
         <>
           {errorAlertVisible && (
-            <Alert className="w-96" severity="error">
+            <Alert className="w-full" severity="error">
               An error occurred, Please try again later
             </Alert>
           )}
           <p>Welcome {APIdata.full_name}!</p>
           <p>Username: {APIdata.username}</p>
           {successAlertVisible && (
-            <Alert className="w-96 z-10" severity="success">
+            <Alert className="w-full" severity="success">
               Your details have been succesfully updated
             </Alert>
           )}
 
           <>
-            <h1> Modify your personal information below</h1>
-            <form className="App" onSubmit={handleSubmit(onSubmit)}>
+            <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
+              <h1 className="text-center">
+                {" "}
+                Modify your personal information below
+              </h1>
               <>
                 <p className="font-semibold my-3">First Name:</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("first_name", { required: "required" })}
                 />
                 {errors.first_name && errors.first_name.message}
                 <p className="font-semibold my-3">Other Names(if any):</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("other_names")}
                 />
                 <p className="font-semibold my-3">Last Name</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("last_name", { required: "required" })}
                 />
@@ -180,14 +183,14 @@ function EditDetails() {
                 {errors.sex && errors.sex.message}
                 <p className="font-semibold my-3">Phone Number:</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("phone_number", { required: "required" })}
                 />
                 {errors.first_name && errors.first_name.message}
                 <p className="font-semibold my-3">Hall</p>
                 <select
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("hall", { required: "required" })}
                 >
                   <option value="Elizabeth Sey Hall">Elizabeth Sey Hall</option>
@@ -197,19 +200,19 @@ function EditDetails() {
                 </select>
                 <p className="font-semibold my-3">Room Number: </p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("room_number")}
                 />{" "}
                 <p className="font-semibold my-3">Programme of Study:</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("programme")}
                 />
                 <p className="font-semibold my-3">Level:</p>
                 <select
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("level")}
                 >
                   <option value="100">100</option>
@@ -219,19 +222,19 @@ function EditDetails() {
                 </select>
                 <p className="font-semibold my-3">Date of birth:</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="date"
                   {...register("date_of_birth")}
                 />{" "}
                 <p className="font-semibold my-3">Congregation:</p>
                 <input
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   type="text"
                   {...register("congregation")}
                 />{" "}
                 <p className="font-semibold my-3">Committee:</p>
                 <select
-                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+                  className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("committee")}
                 >
                   {" "}
@@ -258,7 +261,7 @@ function EditDetails() {
           </>
 
           <button
-            className=" my-5 w-48 py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            className=" my-5 w-48 py-2 px-2 bg-[#e8431e] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
             onClick={async () => {
               localStorage.clear();
               await router.push("/login");

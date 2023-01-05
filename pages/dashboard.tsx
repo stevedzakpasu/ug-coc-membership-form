@@ -60,7 +60,10 @@ function Dashboard() {
           if (response.status == 200) {
             window.scrollTo(0, 0);
             setSuccessAlertVisible(true);
-            setTimeout(() => setSuccessAlertVisible(false), 10000);
+            setTimeout(() => {
+              setSuccessAlertVisible(false);
+              router.reload();
+            }, 10000);
           }
         })
         .catch((error) => {
@@ -111,26 +114,25 @@ function Dashboard() {
   }, [data]);
 
   return (
-    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
+    <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left ">
       {isLoading ? (
         <h1>Kindly wait as the information is loading...</h1>
       ) : (
-        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-900 text-left text-white">
+        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left ">
           {successAlertVisible && (
-            <Alert className="w-96" severity="success">
-              You have been successfully registered! You can now log into your
-              account
+            <Alert className="w-full" severity="success">
+              You have been successfully added your details!
             </Alert>
           )}
           {errorAlertVisible && (
-            <Alert className="w-96" severity="error">
+            <Alert className="w-full" severity="error">
               An error occurred, please try again later!
             </Alert>
           )}
           <p>Welcome {data.full_name}! </p>
           <p>Username:{data.username}</p>
           {data.member_id ? (
-            <div className="text-left">
+            <div className="mx-10 text-left">
               <h1 className="my-5">
                 <p className="font-bold">Membership ID:</p>
                 {data.member_id}
@@ -197,7 +199,7 @@ function Dashboard() {
                   style={{ height: "auto", maxWidth: "100%", width: "100%" }}
                   value={encryptedData}
                   level="Q"
-                  className="p-16 bg-white rounded-3xl"
+                  className="p-7 bg-white "
                 />
               </div>
 
@@ -218,7 +220,7 @@ function Dashboard() {
                 <>
                   <p className="font-semibold my-3">First Name:</p>
                   <input
-                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10 w-96"
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
                     {...register("first_name", { required: true })}
                   />
@@ -381,7 +383,7 @@ function Dashboard() {
           )}
 
           <button
-            className=" my-5 w-48 py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            className=" my-5 w-48 py-2 px-2 bg-[#e8431e] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
             onClick={async () => {
               localStorage.clear();
               await router.push("/login");

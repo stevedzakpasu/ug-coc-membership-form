@@ -58,26 +58,28 @@ function Login() {
       });
   };
   return (
-    <div className="flex items-center justify-center h-screen w-screen flex-col bg-blue-900 text-white">
+    <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
       <>
         {errorAlertVisible && (
-          <Alert className="w-96" severity="error">
+          <Alert className="w-full" severity="error">
             An error occurred, please try again later!
           </Alert>
         )}{" "}
         {LoginErrorAlertVisible && (
-          <Alert className="w-96" severity="error">
+          <Alert className="w-full" severity="error">
             Username or password incorrect!
           </Alert>
         )}
-        <h1>University of Ghana Church of Christ Congregation </h1>
-        <p>Member Details </p>
+        <h1 className="text-center mx-5">
+          University of Ghana Church of Christ Congregation{" "}
+        </h1>
+        <p className="text-center mx-5">Member Details </p>
         <h1 className="font-semibold text-xl my-1">Login</h1>
         <p className="font-light text-sm">Enter your details below </p>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
           <p className="font-semibold my-3">Username</p>
           <input
-            className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-96 p-2.5 h-10"
+            className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
             type="text"
             {...register("username", { required: true })}
           />
