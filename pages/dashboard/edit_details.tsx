@@ -116,7 +116,9 @@ function EditDetails() {
   return (
     <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left">
       {isLoading ? (
-        <h1>Loading...</h1>
+        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-center ">
+          <h1>Loading...</h1>
+        </div>
       ) : (
         <>
           {errorAlertVisible && (
