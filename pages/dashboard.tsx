@@ -197,25 +197,40 @@ function Dashboard() {
               </h1>
               {data.member.committee_1 && (
                 <h1 className="my-5">
-                  <p className="font-bold">Committee 1:</p>
+                  <p className="font-bold">Committee :</p>
 
                   {data.member.committee_1}
                 </h1>
               )}{" "}
               {data.member.committee_2 && (
                 <h1 className="my-5">
-                  <p className="font-bold">Committee 1:</p>
+                  <p className="font-bold"> Additional Committee 1:</p>
 
                   {data.member.committee_2}
                 </h1>
               )}{" "}
               {data.member.committee_3 && (
                 <h1 className="my-5">
-                  <p className="font-bold">Committee 1:</p>
+                  <p className="font-bold"> Additional Committee 2:</p>
 
                   {data.member.committee_3}
                 </h1>
               )}
+              <h1 className="my-5">
+                <p className="font-bold"> Name of Next of Kin: </p>
+
+                {data.member.emergency_contact_name}
+              </h1>{" "}
+              <h1 className="my-5">
+                <p className="font-bold">Relationship to Next of Kin: </p>
+
+                {data.member.emergency_contact_relationship}
+              </h1>{" "}
+              <h1 className="my-5">
+                <p className="font-bold">Phone Number of Next of Kin: </p>
+
+                {data.member.emergency_contact_phone_number}
+              </h1>
               <div>
                 <p className="py-5 text-center">Here is your QR Code</p>
                 <QRCode
