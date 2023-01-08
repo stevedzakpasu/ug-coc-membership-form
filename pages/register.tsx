@@ -99,7 +99,7 @@ function CreateAccount() {
           {...register("username", {
             required: true,
             pattern: {
-              value: /^[a-z0-9_\-]{5,}$/,
+              value: /^[a-z0-9_\-]{3,}$/,
               message: "enter a valid username)",
             },
           })}

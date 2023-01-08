@@ -68,7 +68,7 @@ function Dashboard() {
             setTimeout(() => {
               setSuccessAlertVisible(false);
               router.reload();
-            }, 10000);
+            }, 5000);
           }
         })
         .catch((error) => {
@@ -128,7 +128,7 @@ function Dashboard() {
         <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left ">
           {successAlertVisible && (
             <Alert className="w-full" severity="success">
-              You have been successfully added your details!
+              You have successfully added your details!
             </Alert>
           )}
           {errorAlertVisible && (
