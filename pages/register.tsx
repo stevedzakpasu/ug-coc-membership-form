@@ -92,14 +92,27 @@ function CreateAccount() {
       <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
         <p className="font-semibold my-3">Username</p>
         <input
+          autoCorrect="off"
+          autoCapitalize="none"
           className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
           type="text"
-          {...register("username", { required: true })}
+          {...register("username", {
+            required: true,
+            pattern: {
+              value: /^[a-z0-9_\-]{5,}$/,
+              message: "enter a valid username)",
+            },
+          })}
         />
         {errors.username && (
-          <p className="font-normal text-xs text-red-500">
-            username is mandatory{" "}
-          </p>
+          <>
+            <p className="font-normal text-xs text-red-500">
+              enter a valid username:
+            </p>
+            <p className="font-normal text-xs text-red-500">
+              at least 3 characters, no uppercase, no spaces
+            </p>
+          </>
         )}{" "}
         <p className="font-semibold my-3">Full Name</p>
         <input
@@ -116,11 +129,17 @@ function CreateAccount() {
         <input
           className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
           type="email"
-          {...register("email", { required: true })}
+          {...register("email", {
+            required: true,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "enter a valid email",
+            },
+          })}
         />
         {errors.email && (
           <p className="font-normal text-xs text-red-500">
-            email is mandatory{" "}
+            enter a valid email{" "}
           </p>
         )}
         <p className="font-semibold my-3">Password</p>

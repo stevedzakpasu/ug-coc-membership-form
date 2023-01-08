@@ -79,16 +79,23 @@ function Login() {
         <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
           <p className="font-semibold my-3">Username</p>
           <input
+            autoCorrect="off"
+            autoCapitalize="none"
             className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
             type="text"
-            {...register("username", { required: true })}
+            {...register("username", {
+              required: true,
+              pattern: {
+                value: /^[a-z0-9_\-]{5,}$/,
+                message: "enter a valid username)",
+              },
+            })}
           />
           {errors.username && (
             <p className="font-normal text-xs text-red-500">
-              username is mandatory{" "}
+              enter a valid username{" "}
             </p>
-          )}
-
+          )}{" "}
           <p className="font-semibold my-3">Password</p>
           <input
             className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
@@ -100,7 +107,6 @@ function Login() {
               password is mandatory{" "}
             </p>
           )}
-
           <button
             type={"submit"}
             className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
