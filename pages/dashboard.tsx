@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Alert from "@mui/material/Alert";
 import QRCode from "react-qr-code";
-import * as CryptoJS from "crypto-js"; //
+import * as CryptoJS from "crypto-js";
 function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
@@ -22,14 +22,19 @@ function Dashboard() {
       other_names: null,
       last_name: null,
       sex: null,
+      date_of_birth: null,
       phone_number: null,
       hall: null,
       room_number: null,
       programme: null,
       level: null,
-      date_of_birth: null,
       congregation: null,
-      committee: null,
+      committee_1: null,
+      committee_2: null,
+      committee_3: null,
+      emergency_contact_name: null,
+      emergency_contact_relationship: null,
+      emergency_contact_phone_number: null,
     },
   });
 
@@ -158,6 +163,11 @@ function Dashboard() {
                 {data.member.sex}
               </h1>
               <h1 className="my-5">
+                <p className="font-bold">Date of birth:</p>
+
+                {data.member.date_of_birth}
+              </h1>
+              <h1 className="my-5">
                 <p className="font-bold">Phone Number:</p>
 
                 {data.member.phone_number}
@@ -181,20 +191,31 @@ function Dashboard() {
                 {data.member.level}
               </h1>
               <h1 className="my-5">
-                <p className="font-bold">Date of birth:</p>
-
-                {data.member.date_of_birth}
-              </h1>
-              <h1 className="my-5">
                 <p className="font-bold">Congregation:</p>
 
                 {data.member.congregation}
               </h1>
-              <h1 className="my-5">
-                <p className="font-bold">Committee:</p>
+              {data.member.committee_1 && (
+                <h1 className="my-5">
+                  <p className="font-bold">Committee 1:</p>
 
-                {data.member.committee}
-              </h1>
+                  {data.member.committee_1}
+                </h1>
+              )}{" "}
+              {data.member.committee_2 && (
+                <h1 className="my-5">
+                  <p className="font-bold">Committee 1:</p>
+
+                  {data.member.committee_2}
+                </h1>
+              )}{" "}
+              {data.member.committee_3 && (
+                <h1 className="my-5">
+                  <p className="font-bold">Committee 1:</p>
+
+                  {data.member.committee_3}
+                </h1>
+              )}
               <div>
                 <p className="py-5 text-center">Here is your QR Code</p>
                 <QRCode
@@ -204,7 +225,6 @@ function Dashboard() {
                   className="p-7 bg-white "
                 />
               </div>
-
               <p
                 className=" py-5 font-light text-sm text-center cursor-pointer"
                 onClick={() => router.push("/dashboard/edit_details")}
@@ -250,11 +270,11 @@ function Dashboard() {
                   )}
                   <p className="font-semibold my-3">Gender</p>
                   <label
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ml-2 text-sm font-medium text-gray-900 "
                     htmlFor="male_field"
                   >
                     <input
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
                       type="radio"
                       value="Male"
                       {...register("sex", {
@@ -264,11 +284,11 @@ function Dashboard() {
                     Male
                   </label>
                   <label
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ml-2 text-sm font-medium text-gray-900"
                     htmlFor="female_field"
                   >
                     <input
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 "
                       type="radio"
                       value="Female"
                       {...register("sex", {
@@ -280,6 +300,17 @@ function Dashboard() {
                   {errors.sex && (
                     <p className="font-normal text-xs text-red-500">
                       select a gender
+                    </p>
+                  )}
+                  <p className="font-semibold my-3">Date of birth:</p>
+                  <input
+                    type="date"
+                    {...register("date_of_birth", { required: true })}
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                  />{" "}
+                  {errors.date_of_birth && (
+                    <p className="font-normal text-xs text-red-500">
+                      date of birth is mandatory{" "}
                     </p>
                   )}
                   <p className="font-semibold my-3">Phone Number:</p>
@@ -298,6 +329,10 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("hall", { required: true })}
                   >
+                    <option disabled selected>
+                      {" "}
+                      -- select an option --{" "}
+                    </option>
                     <option value="Elizabeth Sey Hall">
                       Elizabeth Sey Hall
                     </option>
@@ -327,6 +362,10 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("level", { required: true })}
                   >
+                    <option disabled selected>
+                      {" "}
+                      -- select an option --{" "}
+                    </option>
                     <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="300">300</option>
@@ -337,18 +376,7 @@ function Dashboard() {
                       select an option{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Date of birth:</p>
-                  <input
-                    type="date"
-                    {...register("date_of_birth", { required: true })}
-                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                  />{" "}
-                  {errors.date_of_birth && (
-                    <p className="font-normal text-xs text-red-500">
-                      date of birth is mandatory{" "}
-                    </p>
-                  )}
-                  <p className="font-semibold my-3">Congregation:</p>
+                  <p className="font-semibold my-3">Local congregation:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -362,8 +390,12 @@ function Dashboard() {
                   <p className="font-semibold my-3">Committee:</p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                    {...register("committee", { required: true })}
+                    {...register("committee_1")}
                   >
+                    <option disabled selected>
+                      {" "}
+                      -- select an option --{" "}
+                    </option>
                     <option value="Evangelism">Evangelism</option>
                     <option value="Benevolence">Benevolence</option>
                     <option value="Edification">Edification</option>
@@ -371,6 +403,87 @@ function Dashboard() {
                   {errors.committee && (
                     <p className="font-normal text-xs text-red-500">
                       select an option{" "}
+                    </p>
+                  )}
+                  <p className="font-semibold my-3">
+                    Additional Committee 1 (if any):
+                  </p>
+                  <select
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    {...register("committee_2")}
+                  >
+                    <option disabled selected>
+                      {" "}
+                      -- select an option --{" "}
+                    </option>
+                    <option value="Evangelism">Evangelism</option>
+                    <option value="Benevolence">Benevolence</option>
+                    <option value="Edification">Edification</option>
+                  </select>
+                  {errors.committee && (
+                    <p className="font-normal text-xs text-red-500">
+                      select an option{" "}
+                    </p>
+                  )}
+                  <p className="font-semibold my-3">
+                    Additional Committee 2 (if any):
+                  </p>
+                  <select
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    {...register("committee_3")}
+                  >
+                    <option disabled selected>
+                      {" "}
+                      -- select an option --{" "}
+                    </option>
+                    <option value="Evangelism">Evangelism</option>
+                    <option value="Benevolence">Benevolence</option>
+                    <option value="Edification">Edification</option>
+                  </select>
+                  {errors.committee && (
+                    <p className="font-normal text-xs text-red-500">
+                      select an option{" "}
+                    </p>
+                  )}
+                  <p className="font-semibold my-3">Name of Next of Kin: </p>
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("emergency_contact_name", { required: true })}
+                  />{" "}
+                  {errors.emergency_contact_name && (
+                    <p className="font-normal text-xs text-red-500">
+                      next of kin is mandatory{" "}
+                    </p>
+                  )}{" "}
+                  <p className="font-semibold my-3">
+                    Relationship to of Next of Kin:{" "}
+                  </p>
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("emergency_contact_relationship", {
+                      required: true,
+                    })}
+                  />{" "}
+                  {errors.emergency_contact_relationship && (
+                    <p className="font-normal text-xs text-red-500">
+                      next of kin is mandatory{" "}
+                    </p>
+                  )}{" "}
+                  <p className="font-semibold my-3">
+                    Phone Number of Next of Kin:{" "}
+                  </p>
+                  <input
+                    className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                    type="text"
+                    {...register("emergency_contact_phone_number", {
+                      required: true,
+                    })}
+                  />{" "}
+                  {errors.emergency_contact_phone_number && (
+                    <p className="font-normal text-xs text-red-500">
+                      next of kin is mandatory{" "}
                     </p>
                   )}
                   <button
