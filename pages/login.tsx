@@ -4,6 +4,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Login() {
   const {
@@ -16,6 +17,7 @@ function Login() {
   const router = useRouter();
   const [LoginErrorAlertVisible, setLoginErrorAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -28,6 +30,7 @@ function Login() {
   }, []);
 
   const onSubmit = async (data: any) => {
+    setIsLoading(true);
     const reqData = `grant_type=&username=${data.username}&password=${data.password}&scope=&client_id=&client_secret=`;
     axios({
       method: "post",
@@ -39,6 +42,7 @@ function Login() {
       },
     })
       .then((response) => {
+        setIsLoading(false);
         if (response.status == 200) {
           if (typeof window !== "undefined") {
             localStorage.setItem("token", response.data.access_token);
@@ -48,6 +52,7 @@ function Login() {
         }
       })
       .catch((error) => {
+        setIsLoading(false);
         if (error.response.status === 401) {
           setLoginErrorAlertVisible(true);
           setTimeout(() => setLoginErrorAlertVisible(false), 5000);
@@ -109,9 +114,9 @@ function Login() {
           )}
           <button
             type={"submit"}
-            className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
           >
-            Login
+            Login {isLoading && <ClipLoader color="#36d7b7" size={20} />}
           </button>
           <p
             onClick={() => {

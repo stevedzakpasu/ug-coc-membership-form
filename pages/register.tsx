@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Alert from "@mui/material/Alert";
-
+import ClipLoader from "react-spinners/ClipLoader";
 function CreateAccount() {
   const [conflictErrorAlertVisible, setConflictErrorAlertVisible] =
     useState(false);
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
   const {
@@ -29,6 +30,7 @@ function CreateAccount() {
     }
   }, []);
   const onSubmit = async (data: any) => {
+    setIsLoading(true);
     const headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
@@ -43,6 +45,7 @@ function CreateAccount() {
         }
       )
       .then((res) => {
+        setIsLoading(false);
         if (res.status == 200) {
           window.scrollTo(0, 0);
           setSuccessAlertVisible(true);
@@ -51,6 +54,7 @@ function CreateAccount() {
         }
       })
       .catch((error) => {
+        setIsLoading(false);
         if (error.response.status === 409) {
           window.scrollTo(0, 0);
           setConflictErrorAlertVisible(true);
@@ -157,7 +161,7 @@ function CreateAccount() {
           type={"submit"}
           className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
         >
-          Register
+          Register {isLoading && <ClipLoader color="#36d7b7" size={20} />}
         </button>
         <p
           onClick={() => {
