@@ -96,8 +96,12 @@ function Dashboard() {
           })
           .then(async (res) => {
             if (res.status == 200) {
-              setData(res.data);
-              setIsLoading(false);
+              if (res.data.is_admin) {
+                router.push("/admin");
+              } else {
+                setData(res.data);
+                setIsLoading(false);
+              }
             }
           })
           .catch(() => {

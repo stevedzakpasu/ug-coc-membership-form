@@ -16,7 +16,7 @@ function Login() {
   const router = useRouter();
   const [LoginErrorAlertVisible, setLoginErrorAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const isLoggedIn = localStorage.getItem("isLoggedIn");
