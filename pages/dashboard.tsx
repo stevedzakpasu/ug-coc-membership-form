@@ -47,6 +47,7 @@ function Dashboard() {
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data: any) => {
+    console.log(JSON.stringify(data));
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
 
@@ -344,7 +345,7 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("hall", { required: true })}
                   >
-                    <option disabled selected>
+                    <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
@@ -377,7 +378,7 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("level", { required: true })}
                   >
-                    <option disabled selected>
+                    <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
@@ -407,7 +408,7 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("committee_1")}
                   >
-                    <option disabled selected>
+                    <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
@@ -427,7 +428,7 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("committee_2")}
                   >
-                    <option disabled selected>
+                    <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
@@ -447,7 +448,7 @@ function Dashboard() {
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("committee_3")}
                   >
-                    <option disabled selected>
+                    <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>

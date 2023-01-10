@@ -221,7 +221,7 @@ function EditDetails() {
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("hall", { required: "required" })}
                 >
-                  <option disabled selected>
+                  <option disabled selected value={""}>
                     {" "}
                     -- select an option --{" "}
                   </option>
@@ -247,7 +247,7 @@ function EditDetails() {
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("level")}
                 >
-                  <option disabled selected>
+                  <option disabled selected value={""}>
                     {" "}
                     -- select an option --{" "}
                   </option>
@@ -267,7 +267,7 @@ function EditDetails() {
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("committee_1")}
                 >
-                  <option disabled selected>
+                  <option disabled selected value={""}>
                     {" "}
                     -- select an option --{" "}
                   </option>
@@ -282,7 +282,7 @@ function EditDetails() {
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("committee_2")}
                 >
-                  <option disabled selected>
+                  <option disabled selected value={""}>
                     {" "}
                     -- select an option --{" "}
                   </option>
@@ -302,7 +302,7 @@ function EditDetails() {
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                   {...register("committee_3")}
                 >
-                  <option disabled selected>
+                  <option disabled selected value={""}>
                     {" "}
                     -- select an option --{" "}
                   </option>
