@@ -138,8 +138,7 @@ function EditDetails() {
               An error occurred, Please try again later
             </Alert>
           )}
-          <p>Welcome {APIdata.full_name}!</p>
-          <p>Username: {APIdata.username}</p>
+
           {successAlertVisible && (
             <Alert className="w-full" severity="success">
               Your details have been successfully updated
@@ -147,8 +146,11 @@ function EditDetails() {
           )}
 
           <>
+            <h1 className="font-semibold text-2xl font-serif my-10">
+              Welcome {APIdata.full_name}!{" "}
+            </h1>
             <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
-              <h1 className="text-center">
+              <h1 className="font-medium text-sm text-center">
                 {" "}
                 Modify your personal information below
               </h1>
@@ -271,6 +273,7 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
+                  <option value="None">None</option>
                   <option value="Evangelism">Evangelism</option>
                   <option value="Benevolence">Benevolence</option>
                   <option value="Edification">Edification</option>
@@ -286,6 +289,7 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
+                  <option value="None">None</option>
                   <option value="Evangelism">Evangelism</option>
                   <option value="Benevolence">Benevolence</option>
                   <option value="Edification">Edification</option>
@@ -306,6 +310,7 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
+                  <option value="None">None</option>
                   <option value="Evangelism">Evangelism</option>
                   <option value="Benevolence">Benevolence</option>
                   <option value="Edification">Edification</option>

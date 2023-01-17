@@ -254,19 +254,19 @@ function Dashboard() {
               </div>
               <button
                 onClick={() => router.push("/dashboard/edit_details")}
-                className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
+                className=" my-5 w-full py-2 px-2 bg-[#000000] text-white  shadow-md hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
               >
                 Update Details
               </button>
             </div>
           ) : (
             <>
-              <h1 className="font-medium font text-sm">
-                {" "}
-                Kindly fill the form below with the respective information
-              </h1>
               <form className="App" onSubmit={handleSubmit(onSubmit)}>
-                <>
+                <h1 className="font-medium text-sm">
+                  {" "}
+                  Kindly fill the form below with the respective information
+                </h1>
+                <div className=" w-full">
                   <p className="font-semibold my-3">First Name:</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
@@ -522,7 +522,7 @@ function Dashboard() {
                   >
                     Register
                   </button>
-                </>
+                </div>
               </form>
             </>
           )}
