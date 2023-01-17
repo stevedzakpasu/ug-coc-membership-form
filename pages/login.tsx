@@ -64,70 +64,69 @@ function Login() {
   };
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
-      <>
-        {errorAlertVisible && (
-          <Alert className="w-full" severity="error">
-            An error occurred, please try again later!
-          </Alert>
-        )}{" "}
-        {LoginErrorAlertVisible && (
-          <Alert className="w-full" severity="error">
-            Username or password incorrect!
-          </Alert>
-        )}
-        <h1 className="text-center mx-5">
-          University of Ghana Church of Christ Congregation{" "}
-        </h1>
-        <p className="text-center mx-5">Member Details </p>
-        <h1 className="font-semibold text-xl my-1">Login</h1>
-        <p className="font-light text-sm">Enter your details below </p>
-        <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
-          <p className="font-semibold my-3">Username</p>
-          <input
-            autoCorrect="off"
-            autoCapitalize="none"
-            className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-            type="text"
-            {...register("username", {
-              required: true,
-              pattern: {
-                value: /^[a-z0-9_\-]{3,}$/,
-                message: "enter a valid username)",
-              },
-            })}
-          />
-          {errors.username && (
-            <p className="font-normal text-xs text-red-500">
-              enter a valid username{" "}
-            </p>
-          )}{" "}
-          <p className="font-semibold my-3">Password</p>
-          <input
-            className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-            type="password"
-            {...register("password", { required: true })}
-          />
-          {errors.password && (
-            <p className="font-normal text-xs text-red-500">
-              password is mandatory{" "}
-            </p>
-          )}
-          <button
-            type={"submit"}
-            className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
-          >
-            {!isLoading ? <>Login</> : <ClipLoader color="#36d7b7" size={20} />}
-          </button>
-          <p
-            onClick={() => {
-              router.push("/register");
-            }}
-            className=" py-5 font-light text-sm text-center cursor-pointer"
-          >
-            Do not have an account yet? Click here to register
+      {errorAlertVisible && (
+        <Alert className="w-full" severity="error">
+          An error occurred, please try again later!
+        </Alert>
+      )}{" "}
+      {LoginErrorAlertVisible && (
+        <Alert className="w-full" severity="error">
+          Username or password incorrect!
+        </Alert>
+      )}
+      <h1 className="text-center mx-5 font-serif font-semibold">
+        University of Ghana Church of Christ Congregation{" "}
+      </h1>{" "}
+      <h1 className="text-center mx-5 font-serif font-semibold">
+        Membership Registration
+      </h1>
+      <h1 className="font-semibold text-xl my-1">Login</h1>
+      <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
+        <p className="font-semibold my-3">Username</p>
+        <input
+          autoCorrect="off"
+          autoCapitalize="none"
+          className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+          type="text"
+          {...register("username", {
+            required: true,
+            pattern: {
+              value: /^[a-z0-9_\-]{3,}$/,
+              message: "enter a valid username)",
+            },
+          })}
+        />
+        {errors.username && (
+          <p className="font-normal text-xs text-red-500">
+            enter a valid username{" "}
           </p>
-        </form>
-      </>
+        )}{" "}
+        <p className="font-semibold my-3">Password</p>
+        <input
+          className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+          type="password"
+          {...register("password", { required: true })}
+        />
+        {errors.password && (
+          <p className="font-normal text-xs text-red-500">
+            password is mandatory{" "}
+          </p>
+        )}
+        <button
+          type={"submit"}
+          className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
+        >
+          {!isLoading ? <>Login</> : <ClipLoader color="#36d7b7" size={20} />}
+        </button>
+        <p
+          onClick={() => {
+            router.push("/register");
+          }}
+          className=" py-5 font-light text-sm text-center cursor-pointer"
+        >
+          Do not have an account yet? Click here to register
+        </p>
+      </form>
     </div>
   );
 }

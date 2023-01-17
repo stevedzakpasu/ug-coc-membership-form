@@ -85,14 +85,13 @@ function CreateAccount() {
           An error occurred, please try again later!
         </Alert>
       )}
-
-      <h1 className="text-center mx-5">
+      <h1 className="text-center mx-5 font-serif font-semibold">
         University of Ghana Church of Christ Congregation{" "}
+      </h1>{" "}
+      <h1 className="text-center mx-5 font-serif font-semibold">
+        Membership Registration
       </h1>
-      <p className="text-center mx-5">Member Details </p>
       <h1 className="font-semibold text-xl my-1">Create an account</h1>
-      <p className="font-light text-sm">Enter your details below </p>
-
       <form className="mx-5" onSubmit={handleSubmit(onSubmit)}>
         <p className="font-semibold my-3">Username</p>
         <input
