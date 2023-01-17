@@ -42,8 +42,6 @@ function Dashboard() {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
-    watch,
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data: any) => {
@@ -141,8 +139,10 @@ function Dashboard() {
               An error occurred, please try again later!
             </Alert>
           )}
-          <p>Welcome {data.full_name}! </p>
-          <p>Username:{data.username}</p>
+          <h1 className="font-semibold text-2xl font-serif my-10">
+            Welcome {data.full_name}!{" "}
+          </h1>
+
           {data.member_id ? (
             <div className="mx-10 text-left">
               <h1 className="my-5">
@@ -237,24 +237,31 @@ function Dashboard() {
                 {data.member.emergency_contact_phone_number}
               </h1>
               <div>
-                <p className="py-5 text-center">Here is your QR Code</p>
+                <h1 className="py-5 text-center font-extrabold">
+                  Here is your QR Code
+                </h1>
+                <p className="text-xs font-semibold">
+                  {" "}
+                  This code will be scanned at the registration table to mark
+                  you present
+                </p>
                 <QRCode
                   style={{ height: "auto", maxWidth: "100%", width: "100%" }}
                   value={encryptedData}
                   level="Q"
-                  className="p-7 bg-white "
+                  className="p-7 my-5 bg-white  "
                 />
               </div>
-              <p
-                className=" py-5 font-light text-sm text-center cursor-pointer"
+              <button
                 onClick={() => router.push("/dashboard/edit_details")}
+                className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
               >
-                Click here to update details
-              </p>
+                Update Details
+              </button>
             </div>
           ) : (
             <>
-              <h1>
+              <h1 className="font-medium font text-sm">
                 {" "}
                 Kindly fill the form below with the respective information
               </h1>
@@ -407,20 +414,21 @@ function Dashboard() {
                       congregation is mandatory{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Committee:</p>
+                  <p className="font-semibold my-3">Main Committee:</p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                    {...register("committee_1")}
+                    {...register("committee_1", { required: true })}
                   >
                     <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
+                    <option value="None">None</option>
                     <option value="Evangelism">Evangelism</option>
                     <option value="Benevolence">Benevolence</option>
                     <option value="Edification">Edification</option>
                   </select>
-                  {errors.committee && (
+                  {errors.committee_1 && (
                     <p className="font-normal text-xs text-red-500">
                       select an option{" "}
                     </p>
@@ -430,17 +438,18 @@ function Dashboard() {
                   </p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                    {...register("committee_2")}
+                    {...register("committee_2", { required: true })}
                   >
                     <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
-                    <option value="Evangelism">Evangelism</option>
+                    <option value="None">None</option>
+                    <option value="Benevolence">Benevolence</option>
                     <option value="Benevolence">Benevolence</option>
                     <option value="Edification">Edification</option>
                   </select>
-                  {errors.committee && (
+                  {errors.committee_2 && (
                     <p className="font-normal text-xs text-red-500">
                       select an option{" "}
                     </p>
@@ -450,17 +459,18 @@ function Dashboard() {
                   </p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                    {...register("committee_3")}
+                    {...register("committee_3", { required: true })}
                   >
                     <option disabled selected value={""}>
                       {" "}
                       -- select an option --{" "}
                     </option>
+                    <option value="None">None</option>
                     <option value="Evangelism">Evangelism</option>
                     <option value="Benevolence">Benevolence</option>
                     <option value="Edification">Edification</option>
                   </select>
-                  {errors.committee && (
+                  {errors.committee_3 && (
                     <p className="font-normal text-xs text-red-500">
                       select an option{" "}
                     </p>
@@ -518,11 +528,10 @@ function Dashboard() {
           )}
 
           <button
-            className=" my-5 w-48 py-2 px-2 bg-[#e8431e] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
-            onClick={async () => {
+            className=" my-5 w-48 py-2 px-2 bg-[#e8431e] text-white  shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            onClick={() => {
               localStorage.clear();
-              await router.push("/login");
-              router.reload();
+              router.push("/login");
             }}
           >
             Logout
