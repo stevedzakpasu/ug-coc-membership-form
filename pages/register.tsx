@@ -70,18 +70,18 @@ function CreateAccount() {
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
       {successAlertVisible && (
-        <Alert className="w-full" severity="success">
+        <Alert className="my-5" severity="success">
           You have been successfully registered! You can now log into your
           account
         </Alert>
       )}
       {conflictErrorAlertVisible && (
-        <Alert className="w-full" severity="error">
+        <Alert className="my-5" severity="error">
           An error occurred: Username or email address already in use!
         </Alert>
       )}
       {errorAlertVisible && (
-        <Alert className="w-full" severity="error">
+        <Alert className="my-5" severity="error">
           An error occurred, please try again later!
         </Alert>
       )}

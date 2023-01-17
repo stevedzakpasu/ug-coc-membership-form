@@ -65,12 +65,12 @@ function Login() {
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
       {errorAlertVisible && (
-        <Alert className="w-full" severity="error">
+        <Alert className="my-5" severity="error">
           An error occurred, please try again later!
         </Alert>
       )}{" "}
       {LoginErrorAlertVisible && (
-        <Alert className="w-full" severity="error">
+        <Alert className="my-5" severity="error">
           Username or password incorrect!
         </Alert>
       )}

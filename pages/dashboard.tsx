@@ -130,12 +130,12 @@ function Dashboard() {
       ) : (
         <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left ">
           {successAlertVisible && (
-            <Alert className="w-full" severity="success">
+            <Alert className="my-5" severity="success">
               You have successfully added your details!
             </Alert>
           )}
           {errorAlertVisible && (
-            <Alert className="w-full" severity="error">
+            <Alert className="my-5" severity="error">
               An error occurred, please try again later!
             </Alert>
           )}
