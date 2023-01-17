@@ -360,16 +360,16 @@ function EditDetails() {
                   type={"submit"}
                   className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
                 >
-                  Update Details
-                </button>
-                <p
+                  Save Changes
+                </button>{" "}
+                <button
                   onClick={() => {
                     router.push("/dashboard");
                   }}
-                  className=" py-5 font-light text-sm text-center cursor-pointer"
+                  className=" my-5 w-full py-2 px-2 bg-[#000000] text-white  shadow-md hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
                 >
-                  Click here to go back to the main dashboard
-                </p>
+                  Go Back To Dashboard
+                </button>
               </>
             </form>
           </>
