@@ -134,13 +134,13 @@ function EditDetails() {
       ) : (
         <>
           {errorAlertVisible && (
-            <Alert className="w-full" severity="error">
+            <Alert className="my-5" severity="error">
               An error occurred, Please try again later
             </Alert>
           )}
 
           {successAlertVisible && (
-            <Alert className="w-full" severity="success">
+            <Alert className="my-5" severity="success">
               Your details have been successfully updated
             </Alert>
           )}
