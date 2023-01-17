@@ -116,7 +116,7 @@ function Login() {
             type={"submit"}
             className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
           >
-            Login {isLoading && <ClipLoader color="#36d7b7" size={20} />}
+            {!isLoading ? <>Login</> : <ClipLoader color="#36d7b7" size={20} />}
           </button>
           <p
             onClick={() => {
