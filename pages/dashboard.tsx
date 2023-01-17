@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import Alert from "@mui/material/Alert";
 import QRCode from "react-qr-code";
 import * as CryptoJS from "crypto-js";
+import ClipLoader from "react-spinners/ClipLoader";
 function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
   const [encryptedData, setEncryptedData] = useState("");
@@ -45,7 +47,7 @@ function Dashboard() {
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data: any) => {
-    console.log(JSON.stringify(data));
+    setIsSubmitting(true);
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
 
@@ -61,6 +63,8 @@ function Dashboard() {
         },
       })
         .then((response) => {
+          setIsSubmitting(false);
+
           if (response.status == 200) {
             window.scrollTo(0, 0);
             setSuccessAlertVisible(true);
@@ -71,6 +75,8 @@ function Dashboard() {
           }
         })
         .catch((error) => {
+          setIsSubmitting(false);
+
           window.scrollTo(0, 0);
           setErrorAlertVisible(true);
           setTimeout(() => setErrorAlertVisible(false), 5000);
@@ -520,7 +526,11 @@ function Dashboard() {
                     className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
                     type={"submit"}
                   >
-                    Register
+                    {!isSubmitting ? (
+                      <>Register</>
+                    ) : (
+                      <ClipLoader color="#36d7b7" size={20} />
+                    )}
                   </button>
                 </div>
               </form>

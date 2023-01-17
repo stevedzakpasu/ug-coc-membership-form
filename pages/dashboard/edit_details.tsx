@@ -3,9 +3,11 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Alert from "@mui/material/Alert";
+import ClipLoader from "react-spinners/ClipLoader";
 function EditDetails() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [APIdata, setAPIData] = useState({
@@ -39,11 +41,10 @@ function EditDetails() {
     formState: { errors },
     register,
     reset,
-    watch,
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data: any) => {
-    console.log(JSON.stringify(data));
+    setIsSubmitting(true);
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
 
@@ -59,6 +60,7 @@ function EditDetails() {
         },
       })
         .then((response) => {
+          setIsSubmitting(false);
           if (response.status == 200) {
             window.scrollTo(0, 0);
             setSuccessAlertVisible(true);
@@ -66,6 +68,7 @@ function EditDetails() {
           }
         })
         .catch((error) => {
+          setIsSubmitting(false);
           window.scrollTo(0, 0);
           setErrorAlertVisible(true);
           setTimeout(() => setErrorAlertVisible(false), 10000);
@@ -365,7 +368,11 @@ function EditDetails() {
                   type={"submit"}
                   className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
                 >
-                  Save Changes
+                  {!isSubmitting ? (
+                    <>Save Changes</>
+                  ) : (
+                    <ClipLoader color="#36d7b7" size={20} />
+                  )}
                 </button>{" "}
                 <button
                   onClick={() => {
