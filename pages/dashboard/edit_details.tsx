@@ -10,6 +10,50 @@ function EditDetails() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
+  const committees = [
+    "None",
+    "Visitation",
+    "Benevolence",
+    "Edification",
+    "Organizing",
+    "Evangelism",
+    "Secretariat ",
+    "Finance ",
+  ];
+  const halls = [
+    "Non-Resident",
+    "Alexander Kwapong Hall",
+    "Elizabeth Sey Hall",
+    "Dr. Hilla Limann Hall",
+    "Jean Nelson Hall",
+    "Jubilee Hall",
+    "International Students Hostel 1",
+    "International Students Hostel 2",
+    "Vikings Hostel",
+    "Mensah Sarbah Main Hall",
+    "Mensah Sarbah Hall Annex A",
+    "Mensah Sarbah Hall Annex B",
+    "Mensah Sarbah Hall Annex C",
+    "Mensah Sarbah Hall Annex D",
+    "Akuafo Main Hall",
+    "Akuafo Hall Annex A",
+    "Akuafo Hall Annex B",
+    "Akuafo Hall Annex C",
+    "Akuafo Hall Annex D",
+    "Legon Main Hall",
+    "Legon Hall Annex A",
+    "Legon Hall Annex B",
+    "Legon Hall Annex C",
+    "Commonwealth Hall",
+    "Volta Hall",
+    "Valco Hostel 1",
+    "Valco Hostel 2",
+    "African Union Hostel (Pent)",
+    "James Topp Yankah Hall (TF)",
+    "Evandy Hostel",
+    "Heaven's Gate Hostel",
+    "Bani Hostel",
+  ];
   const [APIdata, setAPIData] = useState({
     full_name: null,
     email: null,
@@ -230,10 +274,13 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
-                  <option value="Elizabeth Sey Hall">Elizabeth Sey Hall</option>
-                  <option value="Jean Nelson Hall">Jean Nelson Hall</option>
-                  <option value="Hilla Limann Hall">Hilla Limann Hall</option>
-                  <option value="Alex Kwapong Hall">Alex Kwapong Hall</option>
+                  {halls.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
                 <p className="font-semibold my-3">Room Number: </p>
                 <input
@@ -250,7 +297,7 @@ function EditDetails() {
                 <p className="font-semibold my-3">Level:</p>
                 <select
                   className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
-                  {...register("level")}
+                  {...register("level", { required: true })}
                 >
                   <option disabled selected value={""}>
                     {" "}
@@ -260,6 +307,9 @@ function EditDetails() {
                   <option value="200">200</option>
                   <option value="300">300</option>
                   <option value="400">400</option>
+                  <option value="500">500</option>
+                  <option value="600">600</option>
+                  <option value="Not a student">Not a student</option>
                 </select>
                 <p className="font-semibold my-3">Local congregation:</p>
                 <input
@@ -276,10 +326,13 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
-                  <option value="None">None</option>
-                  <option value="Evangelism">Evangelism</option>
-                  <option value="Benevolence">Benevolence</option>
-                  <option value="Edification">Edification</option>
+                  {committees.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
                 <p className="font-semibold my-3">
                   Additional Committee 1 (if any):
@@ -292,10 +345,13 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
-                  <option value="None">None</option>
-                  <option value="Evangelism">Evangelism</option>
-                  <option value="Benevolence">Benevolence</option>
-                  <option value="Edification">Edification</option>
+                  {committees.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
                 {errors.committee && (
                   <p className="font-normal text-xs text-red-500">
@@ -313,10 +369,13 @@ function EditDetails() {
                     {" "}
                     -- select an option --{" "}
                   </option>
-                  <option value="None">None</option>
-                  <option value="Evangelism">Evangelism</option>
-                  <option value="Benevolence">Benevolence</option>
-                  <option value="Edification">Edification</option>
+                  {committees.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
                 {errors.committee && (
                   <p className="font-normal text-xs text-red-500">
