@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Alert from "@mui/material/Alert";
 import ClipLoader from "react-spinners/ClipLoader";
+import Head from "next/head";
 function EditDetails() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
@@ -174,6 +175,9 @@ function EditDetails() {
 
   return (
     <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left">
+      <Head>
+        <title>Edit details</title>
+      </Head>
       {isLoading ? (
         <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-center ">
           <h1>Loading...</h1>

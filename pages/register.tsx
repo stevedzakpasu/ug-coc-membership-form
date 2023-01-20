@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Alert from "@mui/material/Alert";
 import ClipLoader from "react-spinners/ClipLoader";
+import Head from "next/head";
 function CreateAccount() {
   const [conflictErrorAlertVisible, setConflictErrorAlertVisible] =
     useState(false);
@@ -69,6 +70,9 @@ function CreateAccount() {
   };
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
+      <Head>
+        <title>Register</title>
+      </Head>
       {successAlertVisible && (
         <Alert className="my-5" severity="success">
           You have been successfully registered! You can now log into your

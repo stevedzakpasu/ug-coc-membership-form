@@ -6,6 +6,7 @@ import Alert from "@mui/material/Alert";
 import QRCode from "react-qr-code";
 import * as CryptoJS from "crypto-js";
 import ClipLoader from "react-spinners/ClipLoader";
+import Head from "next/head";
 function Dashboard() {
   const router = useRouter();
   const committees = [
@@ -173,6 +174,9 @@ function Dashboard() {
 
   return (
     <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-left ">
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       {isLoading ? (
         <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-center ">
           <h1>Loading...</h1>

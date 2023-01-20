@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Alert from "@mui/material/Alert";
 import ClipLoader from "react-spinners/ClipLoader";
+import Head from "next/head";
 
 function Login() {
   const {
@@ -64,6 +65,9 @@ function Login() {
   };
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
+      <Head>
+        <title>Login</title>
+      </Head>
       {errorAlertVisible && (
         <Alert className="my-5" severity="error">
           An error occurred, please try again later!
