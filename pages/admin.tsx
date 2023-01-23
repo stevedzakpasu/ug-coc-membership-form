@@ -26,7 +26,8 @@ function Admin() {
             if (res.status == 200) {
               if (!res.data.is_admin) {
                 router.push("/dashboard");
-                setIsAdmin(false);
+              } else {
+                setIsAdmin(true);
               }
             }
           })
@@ -39,7 +40,7 @@ function Admin() {
     };
 
     Login();
-  }, []);
+  }, [isAdmin]);
 
   useEffect(() => {
     async function fetchData() {

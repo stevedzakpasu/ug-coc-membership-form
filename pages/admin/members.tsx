@@ -23,6 +23,8 @@ export default function Members() {
             if (res.status == 200) {
               if (!res.data.is_admin) {
                 router.push("/dashboard");
+              } else {
+                setIsAdmin(true);
               }
             }
           })
@@ -35,7 +37,7 @@ export default function Members() {
     };
 
     Login();
-  }, []);
+  }, [isAdmin]);
   const [membersData, setMembersData] = useState([
     {
       first_name: null,
@@ -175,7 +177,7 @@ export default function Members() {
           </table>
         </>
       ) : (
-        <p> You do not have rights to view this page</p>
+        <p> </p>
       )}
     </div>
   );

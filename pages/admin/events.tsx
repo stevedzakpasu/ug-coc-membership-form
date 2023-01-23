@@ -24,6 +24,8 @@ export default function Events() {
             if (res.status == 200) {
               if (!res.data.is_admin) {
                 router.push("/dashboard");
+              } else {
+                setIsAdmin(true);
               }
             }
           })
@@ -36,7 +38,7 @@ export default function Events() {
     };
 
     Login();
-  }, []);
+  }, [isAdmin]);
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
       <Head>
