@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 function Admin() {
   const router = useRouter();
   const [membersData, setMembersData] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const Login = async () => {
@@ -25,6 +26,7 @@ function Admin() {
             if (res.status == 200) {
               if (!res.data.is_admin) {
                 router.push("/dashboard");
+                setIsAdmin(false);
               }
             }
           })
@@ -58,30 +60,41 @@ function Admin() {
           console.log(membersData.length);
         });
     }
-    fetchData();
-  }, []);
+    if (isAdmin) {
+      fetchData();
+    }
+  }, [isAdmin]);
 
   return (
     <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
       <Head>
         <title>Admin Dashboard</title>
       </Head>
-      <h1 className="font-semibold text-2xl font-serif my-10">
-        Welcome Admin!{" "}
-      </h1>
-      <button>Members Information</button>
-      <button>Events Information</button>
-      <button>Stat Information</button>
 
-      <button
-        onClick={() => {
-          router.push("/login");
-          localStorage.clear();
-        }}
-        className="bg-blue-300"
-      >
-        Logout
-      </button>
+      {isAdmin ? (
+        <>
+          <h1 className="font-semibold text-2xl font-serif my-10">
+            Welcome Admin!{" "}
+          </h1>
+          <button>Members Information</button>
+          <button>Events Information</button>
+          <button>Stat Information</button>
+
+          <button
+            onClick={() => {
+              router.push("/login");
+              localStorage.clear();
+            }}
+            className="bg-blue-300"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <p>You do not have rights to see this page</p>
+        </>
+      )}
     </div>
   );
 }

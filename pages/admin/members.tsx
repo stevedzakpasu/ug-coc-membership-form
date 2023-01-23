@@ -3,6 +3,7 @@ import router from "next/router";
 import React, { useEffect, useState } from "react";
 
 export default function Members() {
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const Login = async () => {
       if (typeof window !== "undefined") {
@@ -124,50 +125,58 @@ export default function Members() {
   }, []);
   return (
     <div className="m-6">
-      <p>Number of members = {membersData.length}</p>
-      <table className="min-w-full divide-y h-10 divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th
-              scope="col"
-              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              MEMBERSHIP ID
-            </th>{" "}
-            <th
-              scope="col"
-              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              FIRST NAME
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              LAST NAME
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              GENDER
-            </th>{" "}
-            <th
-              scope="col"
-              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              PHONE NUMBER
-            </th>{" "}
-            <th
-              scope="col"
-              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              LEVEL
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">{UserData}</tbody>
-      </table>
+      {isAdmin ? (
+        <>
+          <p>Number of members = {membersData.length}</p>
+          <table className="min-w-full divide-y h-10 divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  MEMBERSHIP ID
+                </th>{" "}
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  FIRST NAME
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  LAST NAME
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  GENDER
+                </th>{" "}
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  PHONE NUMBER
+                </th>{" "}
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  LEVEL
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {UserData}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <p> You do not have rights to view this page</p>
+      )}
     </div>
   );
 }

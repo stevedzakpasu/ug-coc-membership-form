@@ -1,8 +1,10 @@
 import axios from "axios";
+import Head from "next/head";
 import router from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Events() {
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const Login = async () => {
       if (typeof window !== "undefined") {
@@ -35,5 +37,36 @@ export default function Events() {
 
     Login();
   }, []);
-  return <div>Events Info</div>;
+  return (
+    <div className="flex items-center justify-center h-screen w-full flex-col bg-blue-200 ">
+      <Head>
+        <title>Admin Dashboard</title>
+      </Head>
+
+      {isAdmin ? (
+        <>
+          <h1 className="font-semibold text-2xl font-serif my-10">
+            Welcome Admin!{" "}
+          </h1>
+          <button>Members Information</button>
+          <button>Events Information</button>
+          <button>Stat Information</button>
+
+          <button
+            onClick={() => {
+              router.push("/login");
+              localStorage.clear();
+            }}
+            className="bg-blue-300"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <p>You do not have rights to see this page</p>
+        </>
+      )}
+    </div>
+  );
 }
