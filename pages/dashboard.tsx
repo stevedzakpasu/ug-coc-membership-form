@@ -318,7 +318,7 @@ function Dashboard() {
                   Kindly fill the form below with the respective information
                 </h1>
                 <div className=" w-full">
-                  <p className="font-semibold my-3">First Name:</p>
+                  <p className="font-semibold my-3">First Name</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -329,7 +329,7 @@ function Dashboard() {
                       first name is mandatory{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Other Names(if any):</p>
+                  <p className="font-semibold my-3">Other Names (if any)</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -380,7 +380,7 @@ function Dashboard() {
                       select a gender
                     </p>
                   )}
-                  <p className="font-semibold my-3">Date of birth:</p>
+                  <p className="font-semibold my-3">Date of birth</p>
                   <input
                     type="date"
                     {...register("date_of_birth", { required: true })}
@@ -391,7 +391,7 @@ function Dashboard() {
                       date of birth is mandatory{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Phone Number:</p>
+                  <p className="font-semibold my-3">Phone Number</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -424,19 +424,19 @@ function Dashboard() {
                       select an option{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Room Number: </p>
+                  <p className="font-semibold my-3">Room Number</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
                     {...register("room_number")}
                   />
-                  <p className="font-semibold my-3">Programme of Study:</p>
+                  <p className="font-semibold my-3">Programme of Study</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
                     {...register("programme")}
                   />
-                  <p className="font-semibold my-3">Level:</p>
+                  <p className="font-semibold my-3">Level</p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("level", { required: true })}
@@ -451,6 +451,9 @@ function Dashboard() {
                     <option value="400">400</option>
                     <option value="500">500</option>
                     <option value="600">600</option>
+                    <option value="700">700</option>
+                    <option value="800">800</option>
+                    <option value="900">900</option>
                     <option value="Not a student">Not a student</option>
                   </select>
                   {errors.level && (
@@ -458,7 +461,7 @@ function Dashboard() {
                       select an option{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Local congregation:</p>
+                  <p className="font-semibold my-3">Local congregation</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -469,7 +472,7 @@ function Dashboard() {
                       congregation is mandatory{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Main Committee:</p>
+                  <p className="font-semibold my-3">Main Committee</p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     {...register("committee_1", { required: true })}
@@ -492,7 +495,7 @@ function Dashboard() {
                     </p>
                   )}
                   <p className="font-semibold my-3">
-                    Additional Committee 1 (if any):
+                    Additional Committee 1 (if any)
                   </p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
@@ -516,7 +519,7 @@ function Dashboard() {
                     </p>
                   )}
                   <p className="font-semibold my-3">
-                    Additional Committee 2 (if any):
+                    Additional Committee 2 (if any)
                   </p>
                   <select
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
@@ -539,7 +542,7 @@ function Dashboard() {
                       select an option{" "}
                     </p>
                   )}
-                  <p className="font-semibold my-3">Name of Next of Kin: </p>
+                  <p className="font-semibold my-3">Name of Next of Kin</p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
                     type="text"
@@ -551,7 +554,7 @@ function Dashboard() {
                     </p>
                   )}{" "}
                   <p className="font-semibold my-3">
-                    Relationship to of Next of Kin:{" "}
+                    Relationship to of Next of Kin{" "}
                   </p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
@@ -566,7 +569,7 @@ function Dashboard() {
                     </p>
                   )}{" "}
                   <p className="font-semibold my-3">
-                    Phone Number of Next of Kin:{" "}
+                    Phone Number of Next of Kin{" "}
                   </p>
                   <input
                     className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
