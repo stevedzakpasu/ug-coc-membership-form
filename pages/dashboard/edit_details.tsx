@@ -109,14 +109,14 @@ function EditDetails() {
           if (response.status == 200) {
             window.scrollTo(0, 0);
             setSuccessAlertVisible(true);
-            setTimeout(() => setSuccessAlertVisible(false), 10000);
+            setTimeout(() => setSuccessAlertVisible(false), 5000);
           }
         })
         .catch((error) => {
           setIsSubmitting(false);
           window.scrollTo(0, 0);
           setErrorAlertVisible(true);
-          setTimeout(() => setErrorAlertVisible(false), 10000);
+          setTimeout(() => setErrorAlertVisible(false), 5000);
         });
     }
   };
@@ -179,7 +179,7 @@ function EditDetails() {
         <title>Edit details</title>
       </Head>
       {isLoading ? (
-        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-center ">
+        <div className="flex items-center justify-center h-screen w-screen flex-col bg-blue-200 text-center ">
           <h1>Loading...</h1>
         </div>
       ) : (
@@ -427,16 +427,21 @@ function EditDetails() {
                     next of kin is mandatory{" "}
                   </p>
                 )}
-                <button
-                  type={"submit"}
-                  className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
-                >
-                  {!isSubmitting ? (
-                    <>Save Changes</>
-                  ) : (
+                {!isSubmitting ? (
+                  <button
+                    className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+                    type={"submit"}
+                  >
+                    Save Changes
+                  </button>
+                ) : (
+                  <button
+                    className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+                    disabled
+                  >
                     <ClipLoader color="#36d7b7" size={20} />
-                  )}
-                </button>{" "}
+                  </button>
+                )}
                 <button
                   onClick={() => {
                     router.push("/dashboard");

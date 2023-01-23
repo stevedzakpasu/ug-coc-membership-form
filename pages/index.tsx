@@ -27,7 +27,7 @@ export default function Home() {
         <title>UG COC Registration</title>
       </Head>
       {isLoading && (
-        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-center ">
+        <div className="flex items-center justify-center h-screen w-screen flex-col bg-blue-200 text-center ">
           Loading...
         </div>
       )}

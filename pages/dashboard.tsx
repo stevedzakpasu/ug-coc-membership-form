@@ -108,20 +108,17 @@ function Dashboard() {
         },
       })
         .then((response) => {
-          setIsSubmitting(false);
-
           if (response.status == 200) {
             window.scrollTo(0, 0);
             setSuccessAlertVisible(true);
             setTimeout(() => {
               setSuccessAlertVisible(false);
               router.reload();
-            }, 5000);
+            }, 2000);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setIsSubmitting(false);
-
           window.scrollTo(0, 0);
           setErrorAlertVisible(true);
           setTimeout(() => setErrorAlertVisible(false), 5000);
@@ -178,7 +175,7 @@ function Dashboard() {
         <title>Dashboard</title>
       </Head>
       {isLoading ? (
-        <div className="flex items-center justify-center h-full w-full flex-col bg-blue-200 text-center ">
+        <div className="flex items-center justify-center h-screen w-screen flex-col bg-blue-200 text-center ">
           <h1>Loading...</h1>
         </div>
       ) : (
@@ -583,16 +580,21 @@ function Dashboard() {
                       next of kin is mandatory{" "}
                     </p>
                   )}
-                  <button
-                    className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
-                    type={"submit"}
-                  >
-                    {!isSubmitting ? (
-                      <>Register</>
-                    ) : (
+                  {!isSubmitting ? (
+                    <button
+                      className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+                      type={"submit"}
+                    >
+                      Register
+                    </button>
+                  ) : (
+                    <button
+                      className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+                      disabled
+                    >
                       <ClipLoader color="#36d7b7" size={20} />
-                    )}
-                  </button>
+                    </button>
+                  )}
                 </div>
               </form>
             </>

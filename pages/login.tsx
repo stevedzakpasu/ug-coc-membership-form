@@ -21,19 +21,22 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isLoggedIn = localStorage.getItem("isLoggedIn");
+    async function checkIsLoggedIn() {
+      if (typeof window !== "undefined") {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-      if (isLoggedIn === "yes") {
-        router.push("/dashboard");
+        if (isLoggedIn === "yes") {
+          router.push("/dashboard");
+        }
       }
     }
+    checkIsLoggedIn();
   }, []);
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     const reqData = `grant_type=&username=${data.username}&password=${data.password}&scope=&client_id=&client_secret=`;
-    axios({
+    await axios({
       method: "post",
       url: "https://ug-attendance-app.herokuapp.com/token",
       data: reqData,
@@ -43,7 +46,6 @@ function Login() {
       },
     })
       .then((response) => {
-        setIsLoading(false);
         if (response.status == 200) {
           if (typeof window !== "undefined") {
             localStorage.setItem("token", response.data.access_token);
@@ -116,12 +118,21 @@ function Login() {
             password is mandatory{" "}
           </p>
         )}
-        <button
-          type={"submit"}
-          className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold justify-center items-center "
-        >
-          {!isLoading ? <>Login</> : <ClipLoader color="#36d7b7" size={20} />}
-        </button>
+        {!isLoading ? (
+          <button
+            className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            type={"submit"}
+          >
+            Login
+          </button>
+        ) : (
+          <button
+            className=" my-5 w-full py-2 px-2 bg-[#0191F2] text-white  shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 font-semibold "
+            disabled
+          >
+            <ClipLoader color="#36d7b7" size={20} />
+          </button>
+        )}
         <p
           onClick={() => {
             router.push("/register");
