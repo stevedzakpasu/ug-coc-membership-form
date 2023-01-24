@@ -28,7 +28,7 @@ export default function Members() {
       emergency_contact_relationship: null,
       emergency_contact_phone_number: null,
       id: null,
-      events_attended: null,
+      events_attended: [],
     },
   ]);
 
@@ -52,8 +52,66 @@ export default function Members() {
             First Name: {props.info.first_name}
           </h1>
           <h1 className="text-lg font-medium text-gray-500">
+            Other Name:{props.info.other_names}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
             Last Name:{props.info.last_name}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Gender:{props.info.sex}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Date of Birth:{props.info.date_of_birth}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Phone Number:{props.info.phone_number}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Hall:{props.info.hall}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Room number:{props.info.room_number}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Programme:{props.info.programme}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Level:{props.info.level}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Local Congregation:{props.info.congregation}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Main Committee:{props.info.committee_1}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Additional Committee 1:{props.info.committee_2}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Additional Committee 2:{props.info.committee_3}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Name of Next of Kin:{props.info.emergency_contact_name}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Relationship to Next of Kin:{" "}
+            {props.info.emergency_contact_relationship}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Phone Number of Next of Kin
+            {props.info.emergency_contact_phone_number}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Events Attended: ({props.info.events_attended.length})
+            <ol>
+              {props.info.events_attended.map((i: any) => (
+                <li key={props.info.events_attended.id}>{i.name}</li>
+              ))}
+            </ol>
           </h1>
+          <h1 className="text-lg font-medium text-gray-500">
+            Delete member Danger zone
+          </h1>{" "}
         </div>
       </div>
     );
@@ -123,7 +181,7 @@ export default function Members() {
         </td>
         <td
           scope="row"
-          className=" text-center text-xs font-medium text-gray-500 tracking-wider"
+          className=" text-center text-xs font-medium text-gray-500 tracking-wider cursor-pointer"
           onClick={() => {
             setDetail(info);
             setTableVisible(false);
