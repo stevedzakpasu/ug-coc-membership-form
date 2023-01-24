@@ -115,7 +115,7 @@ export default function Events() {
         </td>{" "}
         <td
           scope="row"
-          className=" text-center text-xs font-medium text-gray-500 tracking-wider"
+          className=" text-center text-xs font-medium text-gray-500 tracking-wider cursor-pointer"
           onClick={() => {
             setDetail(info);
             setTableVisible(false);
@@ -143,10 +143,35 @@ export default function Events() {
             >
               Back
             </p>
-          </span>
+          </span>{" "}
           <h1 className="text-lg font-medium text-gray-500">
-            First Name: {props.info.name}
+            Event ID: {props.info.id}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Event Name: {props.info.name}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Event Date: {props.info.created_on}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Event Category: {props.info.category}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Semester: {props.info.semester}
+          </h1>{" "}
+          <h1 className="text-lg font-medium text-gray-500">
+            Members Attended: ({props.info.members_attended.length})
+            <ol>
+              {props.info.members_attended.map((i: any) => (
+                <li key={props.info.members_attended.id}>
+                  {i.first_name} {i.last_name}
+                </li>
+              ))}
+            </ol>
           </h1>
+          <h1 className="text-lg font-medium text-gray-500">
+            Delete member Danger zone
+          </h1>{" "}
         </div>
       </div>
     );
