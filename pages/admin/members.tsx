@@ -223,6 +223,12 @@ export default function Members() {
         <>
           {tableVisible && (
             <>
+              <h1
+                className="cursor-pointer"
+                onClick={() => router.push("/admin")}
+              >
+                Back home
+              </h1>
               <p>Number of members = {membersData.length}</p>
               <table className="min-w-full divide-y h-10 divide-gray-200">
                 <thead className="bg-gray-50">
