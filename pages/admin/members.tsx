@@ -1,9 +1,64 @@
 import axios from "axios";
 import router from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 export default function Members() {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [detail, setDetail] = useState({});
+  const [tableVisible, setTableVisible] = useState(true);
+  const [detailsVisible, setDetailsVisible] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [membersData, setMembersData] = useState([
+    {
+      first_name: null,
+      other_names: null,
+      last_name: null,
+      sex: null,
+      date_of_birth: null,
+      phone_number: null,
+      hall: null,
+      room_number: null,
+      programme: null,
+      level: null,
+      congregation: null,
+      committee_1: null,
+      committee_2: null,
+      committee_3: null,
+      emergency_contact_name: null,
+      emergency_contact_relationship: null,
+      emergency_contact_phone_number: null,
+      id: null,
+      events_attended: null,
+    },
+  ]);
+
+  const MembersDetails = (props: any) => {
+    return (
+      <div className="mx-10">
+        <div className="w-full flex-col flex mt-7">
+          <span>
+            <p
+              className="cursor-pointer"
+              onClick={() => {
+                setDetailsVisible(false);
+                setTableVisible(true);
+                setDetail({});
+              }}
+            >
+              Back
+            </p>
+          </span>
+          <h1 className="text-lg font-medium text-gray-500">
+            First Name: {props.info.first_name}
+          </h1>
+          <h1 className="text-lg font-medium text-gray-500">
+            Last Name:{props.info.last_name}
+          </h1>
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const Login = async () => {
       if (typeof window !== "undefined") {
@@ -38,32 +93,10 @@ export default function Members() {
 
     Login();
   }, [isAdmin]);
-  const [membersData, setMembersData] = useState([
-    {
-      first_name: null,
-      other_names: null,
-      last_name: null,
-      sex: null,
-      date_of_birth: null,
-      phone_number: null,
-      hall: null,
-      room_number: null,
-      programme: null,
-      level: null,
-      congregation: null,
-      committee_1: null,
-      committee_2: null,
-      committee_3: null,
-      emergency_contact_name: null,
-      emergency_contact_relationship: null,
-      emergency_contact_phone_number: null,
-      id: null,
-      events_attended: null,
-    },
-  ]);
+
   const UserData = membersData.map((info) => {
     return (
-      <tr key={info.id}>
+      <tr key={info.first_name}>
         <td
           scope="row"
           className="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider"
@@ -86,19 +119,18 @@ export default function Members() {
           scope="row"
           className=" text-center text-xs font-medium text-gray-500 tracking-wider"
         >
-          {info.sex}
-        </td>{" "}
-        <td
-          scope="row"
-          className=" text-center text-xs font-medium text-gray-500 tracking-wider"
-        >
-          {info.phone_number}
-        </td>{" "}
-        <td
-          scope="row"
-          className=" text-center text-xs font-medium text-gray-500 tracking-wider"
-        >
           {info.level}
+        </td>
+        <td
+          scope="row"
+          className=" text-center text-xs font-medium text-gray-500 tracking-wider"
+          onClick={() => {
+            setDetail(info);
+            setTableVisible(false);
+            setDetailsVisible(true);
+          }}
+        >
+          More Info
         </td>
       </tr>
     );
@@ -127,54 +159,48 @@ export default function Members() {
   }, []);
   return (
     <div className="m-6">
+      {detailsVisible && <MembersDetails info={detail} />}
+
       {isAdmin ? (
         <>
-          <p>Number of members = {membersData.length}</p>
-          <table className="min-w-full divide-y h-10 divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  MEMBERSHIP ID
-                </th>{" "}
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  FIRST NAME
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  LAST NAME
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  GENDER
-                </th>{" "}
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  PHONE NUMBER
-                </th>{" "}
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  LEVEL
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {UserData}
-            </tbody>
-          </table>
+          {tableVisible && (
+            <>
+              <p>Number of members = {membersData.length}</p>
+              <table className="min-w-full divide-y h-10 divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      MEMBERSHIP ID
+                    </th>{" "}
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      FIRST NAME
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      LAST NAME
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      LEVEL
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {UserData}
+                </tbody>
+              </table>
+            </>
+          )}
         </>
       ) : (
         <p> </p>
