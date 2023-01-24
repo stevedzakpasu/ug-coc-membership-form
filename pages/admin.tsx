@@ -77,14 +77,21 @@ function Admin() {
           <h1 className="font-semibold text-2xl font-serif my-10">
             Welcome Admin!{" "}
           </h1>
-          <button>Members Information</button>
-          <button>Events Information</button>
-          <button>Stat Information</button>
+          <button onClick={() => router.push("/admin/members")}>
+            Members Information
+          </button>
+          <button onClick={() => router.push("/admin/events")}>
+            Events Information
+          </button>
+          <button onClick={() => router.push("/admin/stats")}>
+            {" "}
+            Stat Information
+          </button>
 
           <button
             onClick={() => {
               router.push("/login");
-              localStorage.clear();
+              localStorage.setItem("isLoggedIn", "no");
             }}
             className="bg-blue-300"
           >
@@ -93,7 +100,7 @@ function Admin() {
         </>
       ) : (
         <>
-          <p>You do not have rights to see this page</p>
+          <p></p>
         </>
       )}
     </div>
