@@ -165,6 +165,7 @@ function EditDetails() {
           })
           .catch(() => {
             localStorage.setItem("isLoggedIn", "no");
+            localStorage.removeItem("token");
             alert("your session has expired, kindly log in again");
             router.push("/login");
           });

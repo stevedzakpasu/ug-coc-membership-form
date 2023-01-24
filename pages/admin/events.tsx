@@ -45,6 +45,7 @@ export default function Events() {
           })
           .catch(() => {
             localStorage.setItem("isLoggedIn", "no");
+            localStorage.removeItem("token");
             alert("Your session has expired, kindly log in again");
             router.push("/login");
           });
