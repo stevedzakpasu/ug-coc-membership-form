@@ -463,7 +463,6 @@ function EditDetails() {
             onClick={() => {
               localStorage.setItem("isLoggedIn", "no");
               router.push("/login");
-              router.reload();
             }}
           >
             Logout
