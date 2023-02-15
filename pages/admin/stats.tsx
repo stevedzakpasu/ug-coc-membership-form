@@ -31,6 +31,7 @@ export default function Stats() {
           })
           .catch(() => {
             localStorage.setItem("isLoggedIn", "no");
+            localStorage.removeItem("token");
             alert("Your session has expired, kindly log in again");
             router.push("/login");
           });
@@ -52,12 +53,12 @@ export default function Stats() {
           </h1>
           <button>Members Information</button>
           <button>Events Information</button>
-          <button>Stat Information</button>
+          <button>Stats Information</button>
 
           <button
             onClick={() => {
               router.push("/login");
-              localStorage.clear();
+              localStorage.setItem("isLoggedIn", "no");
             }}
             className="bg-blue-300"
           >
@@ -66,7 +67,7 @@ export default function Stats() {
         </>
       ) : (
         <>
-          <p>You do not have rights to see this page</p>
+          <p></p>
         </>
       )}
     </div>

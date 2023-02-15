@@ -205,11 +205,13 @@ function Dashboard() {
                 <p className="font-bold">First Name:</p>
                 {data.member.first_name}
               </h1>
-              <h1 className="my-5">
-                <p className="font-bold">Other Names:</p>
+              {data.member.other_names && (
+                <h1 className="my-5">
+                  <p className="font-bold">Other Names:</p>
 
-                {data.member.other_names}
-              </h1>
+                  {data.member.other_names}
+                </h1>
+              )}
               <h1 className="my-5">
                 <p className="font-bold">Last Name:</p>
 
@@ -229,44 +231,50 @@ function Dashboard() {
 
                 {data.member.phone_number}
               </h1>
-              <h1 className="my-5">
-                <p className="font-bold">Hall of Residence:</p>
-                {data.member.hall}
-              </h1>
-              <h1 className="my-5">
-                <p className="font-bold">Room Number:</p>
-                {data.member.room_number}
-              </h1>
-              <h1 className="my-5">
-                <p className="font-bold">Programme of Study:</p>
+              {data.member.hall && (
+                <h1 className="my-5">
+                  <p className="font-bold">Hall of Residence:</p>
+                  {data.member.hall}
+                </h1>
+              )}
+              {data.member.room_number && (
+                <h1 className="my-5">
+                  <p className="font-bold">Room Number:</p>
+                  {data.member.room_number}
+                </h1>
+              )}
+              {data.member.programme && (
+                <h1 className="my-5">
+                  <p className="font-bold">Programme of Study:</p>
 
-                {data.member.programme}
-              </h1>
-              <h1 className="my-5">
-                <p className="font-bold">Level:</p>
+                  {data.member.programme}
+                </h1>
+              )}
+              {data.member.level && (
+                <h1 className="my-5">
+                  <p className="font-bold">Level:</p>
 
-                {data.member.level}
-              </h1>
+                  {data.member.level}
+                </h1>
+              )}
               <h1 className="my-5">
                 <p className="font-bold">Congregation:</p>
 
                 {data.member.congregation}
               </h1>
-              {data.member.committee_1 && (
-                <h1 className="my-5">
-                  <p className="font-bold">Committee :</p>
+              <h1 className="my-5">
+                <p className="font-bold">Committee:</p>
 
-                  {data.member.committee_1}
-                </h1>
-              )}{" "}
-              {data.member.committee_2 && (
+                {data.member.committee_1}
+              </h1>
+              {data.member.committee_2 !== "None" && (
                 <h1 className="my-5">
                   <p className="font-bold"> Additional Committee 1:</p>
 
                   {data.member.committee_2}
                 </h1>
               )}{" "}
-              {data.member.committee_3 && (
+              {data.member.committee_3 !== "None" && (
                 <h1 className="my-5">
                   <p className="font-bold"> Additional Committee 2:</p>
 

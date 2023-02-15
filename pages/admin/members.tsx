@@ -10,7 +10,7 @@ export default function Members() {
   const [searchText, setSearchText] = useState("");
   const [membersData, setMembersData] = useState([
     {
-      first_name: null,
+      first_name: "",
       other_names: null,
       last_name: null,
       sex: null,
@@ -32,6 +32,13 @@ export default function Members() {
     },
   ]);
 
+  const searchFilteredData =
+    searchText.length !== 0
+      ? membersData.filter((x) =>
+          x.first_name.toLowerCase().includes(searchText.toLowerCase())
+        )
+      : membersData;
+
   const MembersDetails = (props: any) => {
     return (
       <div className="mx-10">
@@ -43,6 +50,7 @@ export default function Members() {
                 setDetailsVisible(false);
                 setTableVisible(true);
                 setDetail({});
+                setSearchText("");
               }}
             >
               Back
@@ -210,7 +218,6 @@ export default function Members() {
         )
         .then((res) => {
           setMembersData(res.data);
-          console.log(membersData.length);
         });
     }
     fetchData();
@@ -229,7 +236,13 @@ export default function Members() {
               >
                 Back home
               </h1>
-              <p>Number of members = {membersData.length}</p>
+              <input
+                className="bg-[#D6EDFF] text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
+                type="text"
+                placeholder="search"
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <p>Number of members = {searchFilteredData.length}</p>
               <table className="min-w-full divide-y h-10 divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>

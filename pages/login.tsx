@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -12,8 +11,6 @@ function Login() {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
-    watch,
   } = useForm({ mode: "all" });
   const router = useRouter();
   const [LoginErrorAlertVisible, setLoginErrorAlertVisible] = useState(false);
