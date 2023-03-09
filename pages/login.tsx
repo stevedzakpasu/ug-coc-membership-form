@@ -137,6 +137,14 @@ function Login() {
           className=" py-5 font-light text-sm text-center cursor-pointer"
         >
           Do not have an account yet? Click here to register
+        </p>{" "}
+        <p
+          onClick={() => {
+            router.push("/login_help");
+          }}
+          className=" py-5 font-light text-sm text-center cursor-pointer"
+        >
+          Got troubles login in? Click here for help.
         </p>
       </form>
     </div>
